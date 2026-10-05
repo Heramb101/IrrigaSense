@@ -1,0 +1,15 @@
+feature,mutual_information
+soil_moisture,1.851502
+ec,1.72315
+soil_temperature_7-18cm,1.426606
+ph,1.346044
+weather_pressure,1.184921
+hour,0.62809
+water_vol_past_4h,0.608221
+weather_temp,0.603954
+soil_temperature_0-7cm,0.578349
+weather_humidity,0.404984
+weather_wind_speed,0.39679
+weather_radiation,0.206267
+irrigation_duration_minutes,0.06188
+weather_rain,0.049132

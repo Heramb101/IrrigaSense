@@ -1,0 +1,26 @@
+strategy,scope,zone_id,zone_label,sample_count,feature_count,features_used,mae,rmse,r2
+Strategy A (No Soil Moisture),Global Validation,All,All Validation Sectors,7051,6,weather_temp; weather_humidity; weather_rain; weather_wind_speed; ph; hour,15.4126,23.1489,0.1989
+Strategy B (With Soil Moisture),Global Validation,All,All Validation Sectors,7051,7,weather_temp; weather_humidity; weather_rain; weather_wind_speed; ph; hour; soil_moisture,4.4314,9.0991,0.8762
+Strategy A+ (No SM + Radiation),Global Validation,All,All Validation Sectors,7051,7,weather_temp; weather_humidity; weather_rain; weather_wind_speed; ph; hour; weather_radiation,15.453,23.1156,0.2012
+Strategy B+ (With SM + Radiation),Global Validation,All,All Validation Sectors,7051,8,weather_temp; weather_humidity; weather_rain; weather_wind_speed; ph; hour; soil_moisture; weather_radiation,4.4258,8.8824,0.8821
+Milestone 7B Set C (Reference),Global Validation,All,All Validation Sectors,7051,5,soil_moisture; ec; water_vol_past_4h; weather_temp; weather_radiation,3.3614,7.8554,0.9078
+Strategy A (No Soil Moisture),Per-Zone (Zone 1),1,"Zone 1 (Tomato, open field)",1647,6,weather_temp; weather_humidity; weather_rain; weather_wind_speed; ph; hour,18.2676,26.44,-16206.9237
+Strategy B (With Soil Moisture),Per-Zone (Zone 1),1,"Zone 1 (Tomato, open field)",1647,7,weather_temp; weather_humidity; weather_rain; weather_wind_speed; ph; hour; soil_moisture,2.343,7.0377,-1147.3119
+Strategy A+ (No SM + Radiation),Per-Zone (Zone 1),1,"Zone 1 (Tomato, open field)",1647,7,weather_temp; weather_humidity; weather_rain; weather_wind_speed; ph; hour; weather_radiation,18.3584,26.3094,-16047.127
+Strategy B+ (With SM + Radiation),Per-Zone (Zone 1),1,"Zone 1 (Tomato, open field)",1647,8,weather_temp; weather_humidity; weather_rain; weather_wind_speed; ph; hour; soil_moisture; weather_radiation,2.2324,6.5543,-994.9999
+Milestone 7B Set C (Reference),Per-Zone (Zone 1),1,"Zone 1 (Tomato, open field)",1647,5,soil_moisture; ec; water_vol_past_4h; weather_temp; weather_radiation,1.8924,5.1061,-603.4732
+Strategy A (No Soil Moisture),Per-Zone (Zone 2),2,"Zone 2 (Tomato, open field)",1831,6,weather_temp; weather_humidity; weather_rain; weather_wind_speed; ph; hour,13.3829,20.8495,-4750.6006
+Strategy B (With Soil Moisture),Per-Zone (Zone 2),2,"Zone 2 (Tomato, open field)",1831,7,weather_temp; weather_humidity; weather_rain; weather_wind_speed; ph; hour; soil_moisture,3.48,7.5164,-616.5548
+Strategy A+ (No SM + Radiation),Per-Zone (Zone 2),2,"Zone 2 (Tomato, open field)",1831,7,weather_temp; weather_humidity; weather_rain; weather_wind_speed; ph; hour; weather_radiation,13.7668,21.3117,-4963.6349
+Strategy B+ (With SM + Radiation),Per-Zone (Zone 2),2,"Zone 2 (Tomato, open field)",1831,8,weather_temp; weather_humidity; weather_rain; weather_wind_speed; ph; hour; soil_moisture; weather_radiation,3.3324,7.0554,-543.1237
+Milestone 7B Set C (Reference),Per-Zone (Zone 2),2,"Zone 2 (Tomato, open field)",1831,5,soil_moisture; ec; water_vol_past_4h; weather_temp; weather_radiation,1.5626,4.869,-258.1336
+Strategy A (No Soil Moisture),Per-Zone (Zone 4),4,Zone 4 (Zucchini),1899,6,weather_temp; weather_humidity; weather_rain; weather_wind_speed; ph; hour,7.9869,11.0203,-1.5598
+Strategy B (With Soil Moisture),Per-Zone (Zone 4),4,Zone 4 (Zucchini),1899,7,weather_temp; weather_humidity; weather_rain; weather_wind_speed; ph; hour; soil_moisture,4.0435,5.8094,0.2886
+Strategy A+ (No SM + Radiation),Per-Zone (Zone 4),4,Zone 4 (Zucchini),1899,7,weather_temp; weather_humidity; weather_rain; weather_wind_speed; ph; hour; weather_radiation,7.9619,10.845,-1.479
+Strategy B+ (With SM + Radiation),Per-Zone (Zone 4),4,Zone 4 (Zucchini),1899,8,weather_temp; weather_humidity; weather_rain; weather_wind_speed; ph; hour; soil_moisture; weather_radiation,4.3632,6.1919,0.1919
+Milestone 7B Set C (Reference),Per-Zone (Zone 4),4,Zone 4 (Zucchini),1899,5,soil_moisture; ec; water_vol_past_4h; weather_temp; weather_radiation,2.5486,3.8941,0.6804
+Strategy A (No Soil Moisture),Per-Zone (Zone 5),5,Zone 5 (Blueberry),1674,6,weather_temp; weather_humidity; weather_rain; weather_wind_speed; ph; hour,23.2474,30.9206,-1.1028
+Strategy B (With Soil Moisture),Per-Zone (Zone 5),5,Zone 5 (Blueberry),1674,7,weather_temp; weather_humidity; weather_rain; weather_wind_speed; ph; hour; soil_moisture,7.9668,14.1395,0.5603
+Strategy A+ (No SM + Radiation),Per-Zone (Zone 5),5,Zone 5 (Blueberry),1674,7,weather_temp; weather_humidity; weather_rain; weather_wind_speed; ph; hour; weather_radiation,22.9367,30.6498,-1.0661
+Strategy B+ (With SM + Radiation),Per-Zone (Zone 5),5,Zone 5 (Blueberry),1674,8,weather_temp; weather_humidity; weather_rain; weather_wind_speed; ph; hour; soil_moisture; weather_radiation,7.8506,13.8606,0.5775
+Milestone 7B Set C (Reference),Per-Zone (Zone 5),5,Zone 5 (Blueberry),1674,5,soil_moisture; ec; water_vol_past_4h; weather_temp; weather_radiation,7.6963,13.825,0.5796

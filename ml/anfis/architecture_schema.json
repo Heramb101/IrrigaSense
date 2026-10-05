@@ -1,0 +1,180 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "IrrigaSense ANFIS Architecture Specification Schema",
+  "milestone": "8A",
+  "version": "1.0-frozen",
+  "system_overview": {
+    "model_name": "IrrigaSense Adaptive Neuro-Fuzzy Inference System",
+    "model_type": "First-Order Takagi-Sugeno ANFIS",
+    "framework": "Neuro-Fuzzy Computing (Jang 1993)",
+    "input_dimension": 5,
+    "output_dimension": 1,
+    "target_variable": "target_mean_24h",
+    "target_unit": "% VWC",
+    "target_type": "continuous_regression",
+    "layer_count": 5
+  },
+  "frozen_inputs": [
+    {
+      "index": 1,
+      "canonical_name": "soil_moisture_root_zone",
+      "upstream_source": "Open-Meteo Forecast API",
+      "upstream_parameter": "current.soil_moisture_7_to_28cm",
+      "data_type": "float",
+      "unit": "% VWC",
+      "plausible_bounds": { "min": 5.0, "max": 55.0 },
+      "training_parity_status": "PARITY_ACCEPTABLE_WITH_CAVEAT",
+      "parity_notes": "Mapped to dataset column 'soil_moisture'. Sensor ground-truth vs Open-Meteo numerical model semantic difference acknowledged.",
+      "agronomic_role": "Soil reservoir state variable (7-28cm root zone)"
+    },
+    {
+      "index": 2,
+      "canonical_name": "et0_fao_evapotranspiration",
+      "upstream_source": "Open-Meteo Forecast API",
+      "upstream_parameter": "daily.et0_fao_evapotranspiration[0]",
+      "data_type": "float",
+      "unit": "mm/day",
+      "plausible_bounds": { "min": 1.0, "max": 12.0 },
+      "training_parity_status": "TRAINING_PARITY_GAP_RESOLUTION_REQUIRED_BEFORE_8B",
+      "parity_notes": "Absent from Mendeley CSV. Must be calculated/backfilled via FAO-56 Penman-Monteith equation using dataset weather features prior to training in 8B.",
+      "agronomic_role": "Atmospheric evaporative water demand flux"
+    },
+    {
+      "index": 3,
+      "canonical_name": "temperature_2m",
+      "upstream_source": "Open-Meteo Forecast API",
+      "upstream_parameter": "current.temperature_2m",
+      "data_type": "float",
+      "unit": "°C",
+      "plausible_bounds": { "min": 5.0, "max": 48.0 },
+      "training_parity_status": "PARITY_CERTIFIED",
+      "parity_notes": "Direct 1-to-1 match with dataset column 'weather_temp'.",
+      "agronomic_role": "Thermodynamic sensible heat driver"
+    },
+    {
+      "index": 4,
+      "canonical_name": "relative_humidity_2m",
+      "upstream_source": "Open-Meteo Forecast API",
+      "upstream_parameter": "current.relative_humidity_2m",
+      "data_type": "float",
+      "unit": "%",
+      "plausible_bounds": { "min": 10.0, "max": 100.0 },
+      "training_parity_status": "PARITY_CERTIFIED",
+      "parity_notes": "Direct 1-to-1 match with dataset column 'weather_humidity'.",
+      "agronomic_role": "Vapor Pressure Deficit (VPD) driver"
+    },
+    {
+      "index": 5,
+      "canonical_name": "clay_content",
+      "upstream_source": "ISRIC SoilGrids 1.0.0 WCS",
+      "upstream_parameter": "clay_0-5cm_mean",
+      "data_type": "float",
+      "unit": "%",
+      "plausible_bounds": { "min": 2.0, "max": 75.0 },
+      "training_parity_status": "TRAINING_PARITY_GAP_RESOLUTION_REQUIRED_BEFORE_8B",
+      "parity_notes": "Absent from Mendeley CSV. Must be mapped from experimental zone soil series or station coordinates prior to training in 8B.",
+      "agronomic_role": "Edaphic retention anchor for Field Capacity and Wilting Point"
+    }
+  ],
+  "target_specification": {
+    "canonical_name": "target_mean_24h",
+    "display_name": "Future 24-Hour Mean Volumetric Soil Moisture",
+    "output_variable": "predicted_target_mean_24h",
+    "unit": "% VWC",
+    "datatype": "float",
+    "output_layer": "Layer 5 (Single scalar continuous output node)",
+    "is_continuous_regression": true,
+    "is_binary_decision": false
+  },
+  "membership_function_specification": {
+    "mf_type": "gaussian",
+    "mathematical_formula": "μ(x; c, σ) = exp(-0.5 * ((x - c) / σ)^2)",
+    "parameter_count_per_mf": 2,
+    "parameters": ["c (center)", "σ (width)"],
+    "initialization_policy": "Strictly data-driven using training partition summary statistics (first 32,905 rows). Zero observation of validation or test partitions.",
+    "status_in_8a": "DESIGN_ONLY_UNINITIALIZED"
+  },
+  "network_layers": {
+    "layer_1": {
+      "name": "Fuzzification Layer",
+      "node_type": "Adaptive Premise Nodes",
+      "operation": "Computes Gaussian membership grades for each input dimension.",
+      "parameters": "Premise parameters {c, σ}"
+    },
+    "layer_2": {
+      "name": "Rule Firing Strength Layer",
+      "node_type": "Fixed T-Norm Product Nodes",
+      "operation": "Computes algebraic product of input memberships: w_i = ∏ μ_k(x_k)",
+      "parameters": "None (Fixed algebraic operation)"
+    },
+    "layer_3": {
+      "name": "Normalization Layer",
+      "node_type": "Fixed Normalization Nodes",
+      "operation": "Computes normalized firing strength: w̄_i = w_i / ∑ w_j",
+      "parameters": "None (Fixed algebraic operation)"
+    },
+    "layer_4": {
+      "name": "Consequent Evaluation Layer",
+      "node_type": "Adaptive Linear Nodes",
+      "operation": "Evaluates Sugeno linear polynomial: O_4,i = w̄_i * (∑ p_i,k * x_k + r_i)",
+      "parameters": "Consequent parameters {p_i,1 ... p_i,5, r_i}"
+    },
+    "layer_5": {
+      "name": "Output Summation Layer",
+      "node_type": "Fixed Summation Node",
+      "operation": "Computes overall system output: y = ∑ O_4,i = ∑ w̄_i * f_i",
+      "parameters": "None (Fixed algebraic summation)"
+    }
+  },
+  "architecture_variants": {
+    "architecture_a": {
+      "variant_name": "Architecture A (Primary Baseline)",
+      "input_count": 5,
+      "mfs_per_input": 2,
+      "linguistic_labels": ["Low", "High"],
+      "total_mfs": 10,
+      "rule_count": 32,
+      "premise_parameter_count": 20,
+      "consequent_parameter_count": 192,
+      "total_trainable_parameters": 212,
+      "complexity_profile": "Compact, fast convergence (< 0.1 ms inference), immune to over-parameterization"
+    },
+    "architecture_b": {
+      "variant_name": "Architecture B (High-Capacity Comparison)",
+      "input_count": 5,
+      "mfs_per_input": 3,
+      "linguistic_labels": ["Low", "Medium", "High"],
+      "total_mfs": 15,
+      "rule_count": 243,
+      "premise_parameter_count": 30,
+      "consequent_parameter_count": 1458,
+      "total_trainable_parameters": 1488,
+      "complexity_profile": "High capacity, captures non-linear intermediate regimes, evaluated in 8B/8C"
+    }
+  },
+  "normalization_policy": {
+    "method": "Min-Max scaling to [0.0, 1.0] domain",
+    "scope": "Fitted strictly on chronological training partition (first 32,905 rows)",
+    "leakage_guard": "Validation and test partitions strictly unobserved during scaler fit",
+    "inverse_transformation_required": true,
+    "inverse_formula": "y_pred_unscaled = y_norm * (y_train_max - y_train_min) + y_train_min"
+  },
+  "context_and_recommendation_variables": [
+    { "name": "crop_id", "source": "Farmer Q2", "role": "Kc phenology curve & root depth lookup" },
+    { "name": "planting_date", "source": "Farmer Q3", "role": "DAP calculation & stage modulation" },
+    { "name": "farm_size_acres", "source": "Farmer Q4", "role": "Area volumetric multiplier" },
+    { "name": "irrigation_method", "source": "Farmer Q5", "role": "Application efficiency correction" },
+    { "name": "water_availability", "source": "Farmer Q6", "role": "Operational scheduling constraint" },
+    { "name": "latitude", "source": "Google Maps Q1", "role": "Spatial API lookup" },
+    { "name": "longitude", "source": "Google Maps Q1", "role": "Spatial API lookup" },
+    { "name": "precipitation_forecast", "source": "Open-Meteo", "role": "Advisory suppression filter" }
+  ],
+  "future_training_method": {
+    "milestone": "8B",
+    "algorithm": "Jang Hybrid Learning Algorithm",
+    "consequent_optimization": "Least Squares Estimation (LSE) via SVD",
+    "premise_optimization": "Gradient Descent / Adam Backpropagation",
+    "validation_stop_criterion": "Early stopping on validation MAE (10-epoch patience)",
+    "training_executed_in_8a": false
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "_metadata": {
+    "title": "IrrigaSense Crop Agronomic Knowledge Base",
+    "version": "1.0.0",
+    "description": "Agronomic parameter catalog defining Kc growth stages, Managed Allowable Depletion (MAD), root depth ranges, and soil moisture boundaries. All values derived from standard peer-reviewed agricultural references.",
+    "primary_references": [
+      "FAO Irrigation and Drainage Paper No. 56 (Allen, Pereira, Raes, & Smith, 1998)",
+      "FAO Irrigation Water Management: Irrigation Scheduling (Brouwer, Prins, & Heibloem, 1989)",
+      "USDA-NRCS National Engineering Handbook, Part 652 (Irrigation Guide, 1997)",
+      "Bryla & Strik (2007) - Blueberry Irrigation and Water Relations (USDA-ARS / Oregon State)"
+    ],
+    "unvalidated_value_marker": "REQUIRES AGRONOMIC VALIDATION"
+  },
+  "crops": {
+    "tomato": {
+      "crop_id": "tomato",
+      "crop_name": "Tomato",
+      "scientific_name": "Solanum lycopersicum",
+      "crop_family": "Solanaceae",
+      "aliases": [
+        "tomato",
+        "tomatoes",
+        "tomato, open field",
+        "tomato, pots",
+        "solanum lycopersicum"
+      ],
+      "growth_stages": {
+        "initial": {
+          "stage_name": "Initial / Establishment",
+          "dap_start": 0,
+          "dap_end": 30,
+          "kc": 0.60,
+          "description": "Seed germination to 10% ground canopy cover."
+        },
+        "vegetative": {
+          "stage_name": "Vegetative / Crop Development",
+          "dap_start": 31,
+          "dap_end": 70,
+          "kc": 0.85,
+          "description": "Active vegetative canopy expansion to full ground cover and flowering initiation."
+        },
+        "mid_season": {
+          "stage_name": "Mid-Season / Fruit Setting & Bulking",
+          "dap_start": 71,
+          "dap_end": 115,
+          "kc": 1.15,
+          "description": "Flowering, fruit set, and primary fruit bulking. Maximum water sensitivity."
+        },
+        "late_season": {
+          "stage_name": "Late-Season / Ripening & Harvesting",
+          "dap_start": 116,
+          "dap_end": 145,
+          "kc": 0.80,
+          "description": "Fruit ripening and serial harvesting. Moderate water deficit beneficial to brix content."
+        }
+      },
+      "total_season_dap": 145,
+      "root_depth_ranges_m": {
+        "min": 0.70,
+        "max": 1.20,
+        "reference": "FAO-56 Table 22"
+      },
+      "mad": {
+        "fraction": 0.40,
+        "reference": "FAO-56 Table 22 (p = 0.40 for ET0 ~ 5 mm/day)"
+      },
+      "default_soil_thresholds": {
+        "mineral_soil": {
+          "field_capacity_vwc": 32.0,
+          "permanent_wilting_point_vwc": 14.0,
+          "preferred_moisture_range_vwc": [24.0, 34.0],
+          "stress_threshold_vwc": 21.2,
+          "reference": "Typical loam / clay loam mineral soil (USDA-NRCS)"
+        },
+        "soilless_substrate": {
+          "field_capacity_vwc": 55.0,
+          "permanent_wilting_point_vwc": 20.0,
+          "preferred_moisture_range_vwc": [35.0, 60.0],
+          "stress_threshold_vwc": 34.0,
+          "reference": "Coir / peat potted greenhouse substrate (Bunt, 1988)"
+        }
+      },
+      "special_agronomic_notes": "Highly sensitive to moisture fluctuation during flowering and fruit set (blossom end rot risk)."
+    },
+    "zucchini": {
+      "crop_id": "zucchini",
+      "crop_name": "Zucchini",
+      "scientific_name": "Cucurbita pepo",
+      "crop_family": "Cucurbitaceae",
+      "aliases": [
+        "zucchini",
+        "squash",
+        "courgette",
+        "summer squash",
+        "cucurbita pepo"
+      ],
+      "growth_stages": {
+        "initial": {
+          "stage_name": "Initial / Emergence",
+          "dap_start": 0,
+          "dap_end": 20,
+          "kc": 0.50,
+          "description": "Direct seeding to first true leaf emergence."
+        },
+        "vegetative": {
+          "stage_name": "Vegetative / Rapid Foliage Expansion",
+          "dap_start": 21,
+          "dap_end": 50,
+          "kc": 0.75,
+          "description": "Rapid vine/bush expansion and female flower bud formation."
+        },
+        "mid_season": {
+          "stage_name": "Mid-Season / Continuous Flowering & Fruiting",
+          "dap_start": 51,
+          "dap_end": 80,
+          "kc": 0.95,
+          "description": "Heavy flowering and serial fruit elongation. Constant transpirational draw."
+        },
+        "late_season": {
+          "stage_name": "Late-Season / Senescence & Final Harvest",
+          "dap_start": 81,
+          "dap_end": 105,
+          "kc": 0.75,
+          "description": "Foliar decline, powdery mildew vulnerability, reduced irrigation requirement."
+        }
+      },
+      "total_season_dap": 105,
+      "root_depth_ranges_m": {
+        "min": 0.60,
+        "max": 1.00,
+        "reference": "FAO-56 Table 22"
+      },
+      "mad": {
+        "fraction": 0.50,
+        "reference": "FAO-56 Table 22 (p = 0.50 for squash)"
+      },
+      "default_soil_thresholds": {
+        "mineral_soil": {
+          "field_capacity_vwc": 30.0,
+          "permanent_wilting_point_vwc": 12.0,
+          "preferred_moisture_range_vwc": [22.0, 32.0],
+          "stress_threshold_vwc": 21.0,
+          "reference": "USDA-NRCS Table 2-4 (Silty Loam / Loam)"
+        },
+        "soilless_substrate": {
+          "field_capacity_vwc": 50.0,
+          "permanent_wilting_point_vwc": 18.0,
+          "preferred_moisture_range_vwc": [34.0, 52.0],
+          "stress_threshold_vwc": 34.0,
+          "reference": "REQUIRES AGRONOMIC VALIDATION"
+        }
+      },
+      "special_agronomic_notes": "Moderate drought tolerance, but moisture stress during fruit elongation causes bitter or misshapen fruit."
+    },
+    "blueberry": {
+      "crop_id": "blueberry",
+      "crop_name": "Blueberry",
+      "scientific_name": "Vaccinium corymbosum",
+      "crop_family": "Ericaceae",
+      "aliases": [
+        "blueberry",
+        "blueberries",
+        "highbush blueberry",
+        "vaccinium corymbosum"
+      ],
+      "growth_stages": {
+        "initial": {
+          "stage_name": "Initial / Bud Break & Green Tip",
+          "dap_start": 0,
+          "dap_end": 30,
+          "kc": 0.40,
+          "description": "Dormancy break to initial leaf and bud swell."
+        },
+        "vegetative": {
+          "stage_name": "Vegetative / Shoot Growth & Bloom",
+          "dap_start": 31,
+          "dap_end": 80,
+          "kc": 0.70,
+          "description": "Canopy development and bloom period."
+        },
+        "mid_season": {
+          "stage_name": "Mid-Season / Fruit Swell & Ripening",
+          "dap_start": 81,
+          "dap_end": 140,
+          "kc": 0.95,
+          "description": "Rapid berry enlargement and color break. Peak water consumption."
+        },
+        "late_season": {
+          "stage_name": "Late-Season / Post-Harvest Flower Bud Induction",
+          "dap_start": 141,
+          "dap_end": 180,
+          "kc": 0.70,
+          "description": "Post-harvest maintenance and floral primordia formation for subsequent year."
+        }
+      },
+      "total_season_dap": 180,
+      "root_depth_ranges_m": {
+        "min": 0.30,
+        "max": 0.60,
+        "reference": "Bryla & Strik (2007) - Shallow fibrous root system lacking root hairs"
+      },
+      "mad": {
+        "fraction": 0.35,
+        "reference": "Bryla et al. (2011) - Shallow root zone requires tight allowable depletion (0.30-0.35)"
+      },
+      "default_soil_thresholds": {
+        "mineral_soil": {
+          "field_capacity_vwc": 28.0,
+          "permanent_wilting_point_vwc": 12.0,
+          "preferred_moisture_range_vwc": [22.0, 30.0],
+          "stress_threshold_vwc": 22.4,
+          "reference": "Acidic sandy loam / loam soil (USDA-ARS)"
+        },
+        "soilless_substrate": {
+          "field_capacity_vwc": 50.0,
+          "permanent_wilting_point_vwc": 18.0,
+          "preferred_moisture_range_vwc": [38.0, 52.0],
+          "stress_threshold_vwc": 38.8,
+          "reference": "Peat / pine bark soilless container mix (Bryla et al., 2011)"
+        }
+      },
+      "special_agronomic_notes": "Extremely vulnerable to drought stress due to shallow root architecture without root hairs; vulnerable to root rot under waterlogging."
+    }
+  }
+}

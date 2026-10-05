@@ -1,0 +1,16 @@
+experiment_id,architecture,mf_count,rules,params,learning_rate,ridge_lambda,initialization,patience,epochs,best_epoch,train_mae,val_mae,train_rmse,val_rmse,train_r2,val_r2,generalization_gap_mae,generalization_gap_rmse,training_time,selected,notes
+EXP-A1,Architecture A,2,32,212,0.008,0.0001,quantile,10,30,22,2.69,5.6788,4.5383,12.409,0.9661,0.7698,2.9888,7.8707,22.11,False,"Arch A variant testing lr=0.008, ridge=0.0001, init=quantile"
+EXP-A2,Architecture A,2,32,212,0.001,0.0001,quantile,10,30,30,2.9415,6.9595,4.7616,16.3337,0.9627,0.6012,4.018,11.5721,22.07,False,"Arch A variant testing lr=0.001, ridge=0.0001, init=quantile"
+EXP-A3,Architecture A,2,32,212,0.003,0.0001,quantile,10,27,17,2.9182,6.451,4.7265,14.835,0.9633,0.671,3.5328,10.1085,19.28,False,"Arch A variant testing lr=0.003, ridge=0.0001, init=quantile"
+EXP-A4,Architecture A,2,32,212,0.005,0.0001,quantile,10,21,11,2.9199,6.314,4.7276,14.6566,0.9633,0.6789,3.394,9.9291,15.22,False,"Arch A variant testing lr=0.005, ridge=0.0001, init=quantile"
+EXP-A5,Architecture A,2,32,212,0.01,0.0001,quantile,10,29,19,2.7051,5.6578,4.562,12.401,0.9658,0.7701,2.9527,7.839,20.93,True,"Arch A variant testing lr=0.01, ridge=0.0001, init=quantile"
+EXP-A6,Architecture A,2,32,212,0.008,1e-05,quantile,10,30,22,2.6902,5.6789,4.5389,12.4406,0.9661,0.7686,2.9886,7.9018,21.88,False,"Arch A variant testing lr=0.008, ridge=1e-05, init=quantile"
+EXP-A7,Architecture A,2,32,212,0.008,0.001,quantile,10,15,5,2.9504,6.0577,4.7722,13.8667,0.9626,0.7126,3.1073,9.0945,10.5,False,"Arch A variant testing lr=0.008, ridge=0.001, init=quantile"
+EXP-A8,Architecture A,2,32,212,0.008,0.0001,evenly_spaced,10,14,4,2.8942,5.7035,4.7214,13.9131,0.9634,0.7106,2.8094,9.1917,9.94,False,"Arch A variant testing lr=0.008, ridge=0.0001, init=evenly_spaced"
+EXP-A9,Architecture A,2,32,212,0.008,0.0001,quantile,5,13,8,2.9058,6.2073,4.7151,14.2373,0.9635,0.697,3.3015,9.5222,9.15,False,"Arch A variant testing lr=0.008, ridge=0.0001, init=quantile"
+EXP-A10,Architecture A,2,32,212,0.008,0.0001,quantile,15,35,22,2.69,5.6788,4.5383,12.409,0.9661,0.7698,2.9888,7.8707,25.3,False,"Arch A variant testing lr=0.008, ridge=0.0001, init=quantile"
+EXP-B1,Architecture B,3,243,1488,0.008,0.001,quantile,10,17,7,2.1793,7.319,3.8285,18.9083,0.9759,0.4655,5.1397,15.0798,63.96,False,"Arch B high-capacity variant testing lr=0.008, ridge=0.001"
+EXP-B2,Architecture B,3,243,1488,0.005,0.01,quantile,10,20,14,2.2251,6.9721,3.8852,17.6296,0.9752,0.5354,4.747,13.7444,97.33,False,"Arch B high-capacity variant testing lr=0.005, ridge=0.01"
+EXP-B3,Architecture B,3,243,1488,0.003,0.005,quantile,10,20,20,2.2051,7.0996,3.8633,17.6629,0.9755,0.5336,4.8945,13.7996,283.59,False,"Arch B high-capacity variant testing lr=0.003, ridge=0.005"
+EXP-B4,Architecture B,3,243,1488,0.005,0.01,evenly_spaced,10,20,18,2.2005,7.2931,3.8526,18.0179,0.9756,0.5147,5.0926,14.1653,167.58,False,"Arch B high-capacity variant testing lr=0.005, ridge=0.01"
+EXP-RF-5F,Random Forest (5 Features),0,100,0,0.0,0.0,none,0,100,100,1.3113,3.7449,2.4014,7.9167,0.9905,0.9063,2.4336,5.5153,8.48,False,Fair 5-feature Random Forest baseline on identical chronological split

@@ -1,0 +1,4485 @@
+{
+  "model_metadata": {
+    "model_name": "ANFIS_Architecture_B_243_Rules",
+    "algorithm": "First-Order Takagi-Sugeno ANFIS",
+    "n_inputs": 5,
+    "n_mfs_per_input": 3,
+    "n_rules": 243,
+    "total_premise_params": 30,
+    "total_consequent_params": 1458,
+    "total_params": 1488,
+    "feature_names": [
+      "soil_moisture_root_zone",
+      "et0_fao_evapotranspiration",
+      "temperature_2m",
+      "relative_humidity_2m",
+      "clay_content"
+    ],
+    "target_name": "target_mean_24h",
+    "best_epoch": 7,
+    "best_val_metrics": {
+      "val_mae": 7.319,
+      "val_rmse": 18.9083,
+      "val_r2": 0.4655,
+      "train_mae": 2.1793,
+      "train_rmse": 3.8285
+    },
+    "training_config": {
+      "random_seed": 42,
+      "epochs_run": 17,
+      "learning_rate": 0.008,
+      "lse_ridge_reg": 0.001,
+      "optimizer": "Adam",
+      "total_training_time_s": 83.0,
+      "inference_latency_ms_per_sample": 0.02
+    }
+  },
+  "premise_parameters": {
+    "soil_moisture_root_zone": {
+      "Low": {
+        "center": 0.228538,
+        "sigma": 0.173442
+      },
+      "Medium": {
+        "center": 0.558846,
+        "sigma": 0.088411
+      },
+      "High": {
+        "center": 0.849804,
+        "sigma": 0.084917
+      }
+    },
+    "et0_fao_evapotranspiration": {
+      "Low": {
+        "center": 0.21207,
+        "sigma": 0.081455
+      },
+      "Medium": {
+        "center": 0.555147,
+        "sigma": 0.14586
+      },
+      "High": {
+        "center": 0.850295,
+        "sigma": 0.160531
+      }
+    },
+    "temperature_2m": {
+      "Low": {
+        "center": 0.419333,
+        "sigma": 0.069758
+      },
+      "Medium": {
+        "center": 0.545339,
+        "sigma": 0.05554
+      },
+      "High": {
+        "center": 0.714439,
+        "sigma": 0.085565
+      }
+    },
+    "relative_humidity_2m": {
+      "Low": {
+        "center": 0.240231,
+        "sigma": 0.081785
+      },
+      "Medium": {
+        "center": 0.510246,
+        "sigma": 0.091559
+      },
+      "High": {
+        "center": 0.789462,
+        "sigma": 0.070319
+      }
+    },
+    "clay_content": {
+      "Low": {
+        "center": -0.034024,
+        "sigma": 0.177704
+      },
+      "Medium": {
+        "center": 1.034202,
+        "sigma": 0.177676
+      },
+      "High": {
+        "center": 1.034202,
+        "sigma": 0.177676
+      }
+    }
+  },
+  "rules": [
+    {
+      "rule_id": 1,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -16.734789,
+        "et0_fao_evapotranspiration": -9.271716,
+        "temperature_2m": -8.979469,
+        "relative_humidity_2m": -14.596302,
+        "clay_content": 2e-06,
+        "intercept": -28.92221
+      }
+    },
+    {
+      "rule_id": 2,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -38.912611,
+        "et0_fao_evapotranspiration": 45.942176,
+        "temperature_2m": -11.102774,
+        "relative_humidity_2m": -67.000936,
+        "clay_content": 40.496221,
+        "intercept": 40.49622
+      }
+    },
+    {
+      "rule_id": 3,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -38.912611,
+        "et0_fao_evapotranspiration": 45.942175,
+        "temperature_2m": -11.102774,
+        "relative_humidity_2m": -67.000935,
+        "clay_content": 40.496221,
+        "intercept": 40.496219
+      }
+    },
+    {
+      "rule_id": 4,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -77.518167,
+        "et0_fao_evapotranspiration": 10.624469,
+        "temperature_2m": -143.736211,
+        "relative_humidity_2m": 16.820803,
+        "clay_content": 1e-06,
+        "intercept": 143.5393
+      }
+    },
+    {
+      "rule_id": 5,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 28.287887,
+        "et0_fao_evapotranspiration": -18.308296,
+        "temperature_2m": 4.991011,
+        "relative_humidity_2m": -11.210093,
+        "clay_content": 23.4814,
+        "intercept": 23.481406
+      }
+    },
+    {
+      "rule_id": 6,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 28.287887,
+        "et0_fao_evapotranspiration": -18.308296,
+        "temperature_2m": 4.991011,
+        "relative_humidity_2m": -11.210093,
+        "clay_content": 23.4814,
+        "intercept": 23.481406
+      }
+    },
+    {
+      "rule_id": 7,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -19.872089,
+        "et0_fao_evapotranspiration": 56.519395,
+        "temperature_2m": -86.217047,
+        "relative_humidity_2m": 6.507915,
+        "clay_content": 1e-06,
+        "intercept": 95.378138
+      }
+    },
+    {
+      "rule_id": 8,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 27.307592,
+        "et0_fao_evapotranspiration": -1.601643,
+        "temperature_2m": -2.931923,
+        "relative_humidity_2m": 7.081638,
+        "clay_content": 17.529736,
+        "intercept": 17.52974
+      }
+    },
+    {
+      "rule_id": 9,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 27.307591,
+        "et0_fao_evapotranspiration": -1.601643,
+        "temperature_2m": -2.931922,
+        "relative_humidity_2m": 7.081638,
+        "clay_content": 17.529736,
+        "intercept": 17.52974
+      }
+    },
+    {
+      "rule_id": 10,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -0.773495,
+        "et0_fao_evapotranspiration": 9.425236,
+        "temperature_2m": 24.530785,
+        "relative_humidity_2m": 44.875016,
+        "clay_content": 1e-06,
+        "intercept": 52.102151
+      }
+    },
+    {
+      "rule_id": 11,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -69.942028,
+        "et0_fao_evapotranspiration": 61.476011,
+        "temperature_2m": 62.910371,
+        "relative_humidity_2m": -83.130055,
+        "clay_content": 19.338384,
+        "intercept": 19.338387
+      }
+    },
+    {
+      "rule_id": 12,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -69.942027,
+        "et0_fao_evapotranspiration": 61.47601,
+        "temperature_2m": 62.91037,
+        "relative_humidity_2m": -83.130054,
+        "clay_content": 19.338384,
+        "intercept": 19.338386
+      }
+    },
+    {
+      "rule_id": 13,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 5.364902,
+        "et0_fao_evapotranspiration": -89.81732,
+        "temperature_2m": 75.980535,
+        "relative_humidity_2m": -25.780475,
+        "clay_content": -0.0,
+        "intercept": 64.060637
+      }
+    },
+    {
+      "rule_id": 14,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 11.802434,
+        "et0_fao_evapotranspiration": -0.440958,
+        "temperature_2m": 125.342429,
+        "relative_humidity_2m": -28.646917,
+        "clay_content": -4.51577,
+        "intercept": -4.515768
+      }
+    },
+    {
+      "rule_id": 15,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 11.802434,
+        "et0_fao_evapotranspiration": -0.440958,
+        "temperature_2m": 125.342427,
+        "relative_humidity_2m": -28.646916,
+        "clay_content": -4.51577,
+        "intercept": -4.515768
+      }
+    },
+    {
+      "rule_id": 16,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 22.797119,
+        "et0_fao_evapotranspiration": -61.540364,
+        "temperature_2m": 26.395232,
+        "relative_humidity_2m": 89.834209,
+        "clay_content": -0.0,
+        "intercept": 45.573253
+      }
+    },
+    {
+      "rule_id": 17,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 150.15426,
+        "et0_fao_evapotranspiration": -150.810745,
+        "temperature_2m": 55.857683,
+        "relative_humidity_2m": 6.752255,
+        "clay_content": -0.333655,
+        "intercept": -0.333652
+      }
+    },
+    {
+      "rule_id": 18,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 150.154258,
+        "et0_fao_evapotranspiration": -150.810742,
+        "temperature_2m": 55.857682,
+        "relative_humidity_2m": 6.752255,
+        "clay_content": -0.333655,
+        "intercept": -0.333652
+      }
+    },
+    {
+      "rule_id": 19,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -26.941274,
+        "et0_fao_evapotranspiration": 2.892229,
+        "temperature_2m": 61.100267,
+        "relative_humidity_2m": -2.782686,
+        "clay_content": 1e-06,
+        "intercept": 43.678317
+      }
+    },
+    {
+      "rule_id": 20,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 54.28732,
+        "et0_fao_evapotranspiration": -73.246336,
+        "temperature_2m": 12.258624,
+        "relative_humidity_2m": 1.910709,
+        "clay_content": 16.82128,
+        "intercept": 16.821282
+      }
+    },
+    {
+      "rule_id": 21,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 54.287319,
+        "et0_fao_evapotranspiration": -73.246335,
+        "temperature_2m": 12.258624,
+        "relative_humidity_2m": 1.910709,
+        "clay_content": 16.82128,
+        "intercept": 16.821282
+      }
+    },
+    {
+      "rule_id": 22,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 23.552162,
+        "et0_fao_evapotranspiration": -35.283123,
+        "temperature_2m": 29.442993,
+        "relative_humidity_2m": 15.176339,
+        "clay_content": -2e-06,
+        "intercept": 59.612708
+      }
+    },
+    {
+      "rule_id": 23,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 171.981146,
+        "et0_fao_evapotranspiration": -212.775787,
+        "temperature_2m": 167.302273,
+        "relative_humidity_2m": 27.393802,
+        "clay_content": -40.314051,
+        "intercept": -40.314048
+      }
+    },
+    {
+      "rule_id": 24,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 171.981143,
+        "et0_fao_evapotranspiration": -212.775783,
+        "temperature_2m": 167.30227,
+        "relative_humidity_2m": 27.393801,
+        "clay_content": -40.31405,
+        "intercept": -40.314048
+      }
+    },
+    {
+      "rule_id": 25,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 2.02923,
+        "et0_fao_evapotranspiration": -0.617335,
+        "temperature_2m": 5.155355,
+        "relative_humidity_2m": 6.837603,
+        "clay_content": 0.0,
+        "intercept": 0.969862
+      }
+    },
+    {
+      "rule_id": 26,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 47.743391,
+        "et0_fao_evapotranspiration": -2.473025,
+        "temperature_2m": -7.713961,
+        "relative_humidity_2m": 10.089618,
+        "clay_content": 6.118889,
+        "intercept": 6.118889
+      }
+    },
+    {
+      "rule_id": 27,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 47.74339,
+        "et0_fao_evapotranspiration": -2.473025,
+        "temperature_2m": -7.713961,
+        "relative_humidity_2m": 10.089617,
+        "clay_content": 6.118889,
+        "intercept": 6.118889
+      }
+    },
+    {
+      "rule_id": 28,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -2.11725,
+        "et0_fao_evapotranspiration": 15.921164,
+        "temperature_2m": 14.086947,
+        "relative_humidity_2m": -31.068525,
+        "clay_content": -0.0,
+        "intercept": -4.908027
+      }
+    },
+    {
+      "rule_id": 29,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 18.799034,
+        "et0_fao_evapotranspiration": -23.413361,
+        "temperature_2m": 32.990729,
+        "relative_humidity_2m": -0.009426,
+        "clay_content": -7.778836,
+        "intercept": -7.778836
+      }
+    },
+    {
+      "rule_id": 30,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 18.799034,
+        "et0_fao_evapotranspiration": -23.413361,
+        "temperature_2m": 32.990728,
+        "relative_humidity_2m": -0.009426,
+        "clay_content": -7.778836,
+        "intercept": -7.778836
+      }
+    },
+    {
+      "rule_id": 31,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -21.072651,
+        "et0_fao_evapotranspiration": 44.704979,
+        "temperature_2m": -53.274103,
+        "relative_humidity_2m": 43.715254,
+        "clay_content": 1e-06,
+        "intercept": 11.765285
+      }
+    },
+    {
+      "rule_id": 32,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 82.94226,
+        "et0_fao_evapotranspiration": -90.189925,
+        "temperature_2m": 35.930817,
+        "relative_humidity_2m": -34.008973,
+        "clay_content": 32.529405,
+        "intercept": 32.529405
+      }
+    },
+    {
+      "rule_id": 33,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 82.942258,
+        "et0_fao_evapotranspiration": -90.189923,
+        "temperature_2m": 35.930817,
+        "relative_humidity_2m": -34.008973,
+        "clay_content": 32.529404,
+        "intercept": 32.529405
+      }
+    },
+    {
+      "rule_id": 34,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 158.349765,
+        "et0_fao_evapotranspiration": 134.89509,
+        "temperature_2m": 19.127197,
+        "relative_humidity_2m": -218.909991,
+        "clay_content": 0.0,
+        "intercept": 123.330792
+      }
+    },
+    {
+      "rule_id": 35,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 115.892709,
+        "et0_fao_evapotranspiration": -8.049004,
+        "temperature_2m": -14.626629,
+        "relative_humidity_2m": 3.125308,
+        "clay_content": 7.402901,
+        "intercept": 7.402906
+      }
+    },
+    {
+      "rule_id": 36,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 115.892707,
+        "et0_fao_evapotranspiration": -8.049004,
+        "temperature_2m": -14.626629,
+        "relative_humidity_2m": 3.125308,
+        "clay_content": 7.402901,
+        "intercept": 7.402906
+      }
+    },
+    {
+      "rule_id": 37,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 31.861323,
+        "et0_fao_evapotranspiration": 40.60153,
+        "temperature_2m": 2.015374,
+        "relative_humidity_2m": -2.770975,
+        "clay_content": 3e-06,
+        "intercept": 49.46742
+      }
+    },
+    {
+      "rule_id": 38,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 110.158093,
+        "et0_fao_evapotranspiration": -70.556914,
+        "temperature_2m": -169.679986,
+        "relative_humidity_2m": 69.738211,
+        "clay_content": 61.681638,
+        "intercept": 61.68164
+      }
+    },
+    {
+      "rule_id": 39,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 110.158091,
+        "et0_fao_evapotranspiration": -70.556913,
+        "temperature_2m": -169.679983,
+        "relative_humidity_2m": 69.738209,
+        "clay_content": 61.681637,
+        "intercept": 61.681639
+      }
+    },
+    {
+      "rule_id": 40,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 86.165786,
+        "et0_fao_evapotranspiration": 27.439402,
+        "temperature_2m": 38.821891,
+        "relative_humidity_2m": 9.183876,
+        "clay_content": -1e-06,
+        "intercept": 73.703679
+      }
+    },
+    {
+      "rule_id": 41,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 133.289236,
+        "et0_fao_evapotranspiration": 14.534105,
+        "temperature_2m": 36.362009,
+        "relative_humidity_2m": 12.000484,
+        "clay_content": -20.117656,
+        "intercept": -20.117653
+      }
+    },
+    {
+      "rule_id": 42,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 133.289234,
+        "et0_fao_evapotranspiration": 14.534105,
+        "temperature_2m": 36.362008,
+        "relative_humidity_2m": 12.000484,
+        "clay_content": -20.117656,
+        "intercept": -20.117653
+      }
+    },
+    {
+      "rule_id": 43,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 121.875907,
+        "et0_fao_evapotranspiration": -81.70636,
+        "temperature_2m": -3.974567,
+        "relative_humidity_2m": 51.138447,
+        "clay_content": -1e-06,
+        "intercept": 62.064221
+      }
+    },
+    {
+      "rule_id": 44,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 92.699671,
+        "et0_fao_evapotranspiration": -2.627694,
+        "temperature_2m": 75.382527,
+        "relative_humidity_2m": -0.229272,
+        "clay_content": -17.461776,
+        "intercept": -17.461773
+      }
+    },
+    {
+      "rule_id": 45,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 92.69967,
+        "et0_fao_evapotranspiration": -2.627694,
+        "temperature_2m": 75.382526,
+        "relative_humidity_2m": -0.229272,
+        "clay_content": -17.461776,
+        "intercept": -17.461773
+      }
+    },
+    {
+      "rule_id": 46,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -138.160979,
+        "et0_fao_evapotranspiration": 307.402449,
+        "temperature_2m": -141.050177,
+        "relative_humidity_2m": -190.426874,
+        "clay_content": 1e-06,
+        "intercept": 124.719628
+      }
+    },
+    {
+      "rule_id": 47,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 113.594734,
+        "et0_fao_evapotranspiration": -39.554873,
+        "temperature_2m": -5.73662,
+        "relative_humidity_2m": -12.660659,
+        "clay_content": 11.768366,
+        "intercept": 11.768372
+      }
+    },
+    {
+      "rule_id": 48,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 113.594732,
+        "et0_fao_evapotranspiration": -39.554873,
+        "temperature_2m": -5.73662,
+        "relative_humidity_2m": -12.660659,
+        "clay_content": 11.768366,
+        "intercept": 11.768371
+      }
+    },
+    {
+      "rule_id": 49,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -45.921361,
+        "et0_fao_evapotranspiration": -58.597277,
+        "temperature_2m": 2.056942,
+        "relative_humidity_2m": -26.415685,
+        "clay_content": 0.0,
+        "intercept": 68.23742
+      }
+    },
+    {
+      "rule_id": 50,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 107.349279,
+        "et0_fao_evapotranspiration": -11.89709,
+        "temperature_2m": 7.620117,
+        "relative_humidity_2m": -0.882436,
+        "clay_content": 1.252198,
+        "intercept": 1.252201
+      }
+    },
+    {
+      "rule_id": 51,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 107.349277,
+        "et0_fao_evapotranspiration": -11.897089,
+        "temperature_2m": 7.620117,
+        "relative_humidity_2m": -0.882436,
+        "clay_content": 1.252198,
+        "intercept": 1.252201
+      }
+    },
+    {
+      "rule_id": 52,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 11.768467,
+        "et0_fao_evapotranspiration": -51.761331,
+        "temperature_2m": 21.58993,
+        "relative_humidity_2m": -14.536563,
+        "clay_content": -1e-06,
+        "intercept": -8.2832
+      }
+    },
+    {
+      "rule_id": 53,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 71.300211,
+        "et0_fao_evapotranspiration": -28.515901,
+        "temperature_2m": 90.240664,
+        "relative_humidity_2m": -7.288541,
+        "clay_content": -18.4611,
+        "intercept": -18.4611
+      }
+    },
+    {
+      "rule_id": 54,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 71.30021,
+        "et0_fao_evapotranspiration": -28.515901,
+        "temperature_2m": 90.240662,
+        "relative_humidity_2m": -7.288541,
+        "clay_content": -18.461099,
+        "intercept": -18.4611
+      }
+    },
+    {
+      "rule_id": 55,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -0.195217,
+        "et0_fao_evapotranspiration": -3.501734,
+        "temperature_2m": 1.409985,
+        "relative_humidity_2m": -4.677583,
+        "clay_content": 2e-06,
+        "intercept": -1.888043
+      }
+    },
+    {
+      "rule_id": 56,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 18.506825,
+        "et0_fao_evapotranspiration": 15.286735,
+        "temperature_2m": 23.520817,
+        "relative_humidity_2m": 8.61987,
+        "clay_content": 38.544732,
+        "intercept": 38.544732
+      }
+    },
+    {
+      "rule_id": 57,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 18.506825,
+        "et0_fao_evapotranspiration": 15.286735,
+        "temperature_2m": 23.520817,
+        "relative_humidity_2m": 8.619869,
+        "clay_content": 38.544731,
+        "intercept": 38.544731
+      }
+    },
+    {
+      "rule_id": 58,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 96.879703,
+        "et0_fao_evapotranspiration": 169.117387,
+        "temperature_2m": 107.496983,
+        "relative_humidity_2m": 119.808808,
+        "clay_content": 4e-06,
+        "intercept": 201.116446
+      }
+    },
+    {
+      "rule_id": 59,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 206.308266,
+        "et0_fao_evapotranspiration": -128.729564,
+        "temperature_2m": 103.153066,
+        "relative_humidity_2m": -211.026718,
+        "clay_content": 84.327366,
+        "intercept": 84.327375
+      }
+    },
+    {
+      "rule_id": 60,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 206.308263,
+        "et0_fao_evapotranspiration": -128.729562,
+        "temperature_2m": 103.153064,
+        "relative_humidity_2m": -211.026715,
+        "clay_content": 84.327365,
+        "intercept": 84.327374
+      }
+    },
+    {
+      "rule_id": 61,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -0.993651,
+        "et0_fao_evapotranspiration": -17.479458,
+        "temperature_2m": -30.081883,
+        "relative_humidity_2m": 21.268652,
+        "clay_content": -0.0,
+        "intercept": 6.239248
+      }
+    },
+    {
+      "rule_id": 62,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 87.159359,
+        "et0_fao_evapotranspiration": 107.102706,
+        "temperature_2m": -149.19746,
+        "relative_humidity_2m": 9.552191,
+        "clay_content": -7.655417,
+        "intercept": -7.655416
+      }
+    },
+    {
+      "rule_id": 63,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 87.159357,
+        "et0_fao_evapotranspiration": 107.102705,
+        "temperature_2m": -149.197458,
+        "relative_humidity_2m": 9.552191,
+        "clay_content": -7.655417,
+        "intercept": -7.655416
+      }
+    },
+    {
+      "rule_id": 64,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -3.885216,
+        "et0_fao_evapotranspiration": 25.346564,
+        "temperature_2m": -4.287413,
+        "relative_humidity_2m": 6.961409,
+        "clay_content": 4e-06,
+        "intercept": 7.252462
+      }
+    },
+    {
+      "rule_id": 65,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 85.903011,
+        "et0_fao_evapotranspiration": -184.334136,
+        "temperature_2m": -56.46538,
+        "relative_humidity_2m": -19.825145,
+        "clay_content": 95.693523,
+        "intercept": 95.693524
+      }
+    },
+    {
+      "rule_id": 66,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 85.90301,
+        "et0_fao_evapotranspiration": -184.334133,
+        "temperature_2m": -56.465379,
+        "relative_humidity_2m": -19.825145,
+        "clay_content": 95.693522,
+        "intercept": 95.693522
+      }
+    },
+    {
+      "rule_id": 67,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 51.46714,
+        "et0_fao_evapotranspiration": 38.566578,
+        "temperature_2m": -21.093721,
+        "relative_humidity_2m": 63.319267,
+        "clay_content": -0.0,
+        "intercept": -18.214233
+      }
+    },
+    {
+      "rule_id": 68,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 95.25236,
+        "et0_fao_evapotranspiration": 19.879479,
+        "temperature_2m": -12.380361,
+        "relative_humidity_2m": 22.63926,
+        "clay_content": -10.277518,
+        "intercept": -10.277518
+      }
+    },
+    {
+      "rule_id": 69,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 95.252358,
+        "et0_fao_evapotranspiration": 19.879479,
+        "temperature_2m": -12.380361,
+        "relative_humidity_2m": 22.639259,
+        "clay_content": -10.277517,
+        "intercept": -10.277518
+      }
+    },
+    {
+      "rule_id": 70,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 18.637066,
+        "et0_fao_evapotranspiration": 77.600346,
+        "temperature_2m": 18.168145,
+        "relative_humidity_2m": -17.837698,
+        "clay_content": 2e-06,
+        "intercept": 17.486078
+      }
+    },
+    {
+      "rule_id": 71,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 182.430274,
+        "et0_fao_evapotranspiration": -33.989351,
+        "temperature_2m": -119.862222,
+        "relative_humidity_2m": -7.713597,
+        "clay_content": 44.006072,
+        "intercept": 44.006073
+      }
+    },
+    {
+      "rule_id": 72,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 182.430271,
+        "et0_fao_evapotranspiration": -33.989351,
+        "temperature_2m": -119.86222,
+        "relative_humidity_2m": -7.713597,
+        "clay_content": 44.006071,
+        "intercept": 44.006072
+      }
+    },
+    {
+      "rule_id": 73,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -35.049766,
+        "et0_fao_evapotranspiration": -17.102879,
+        "temperature_2m": 44.223907,
+        "relative_humidity_2m": 38.858741,
+        "clay_content": 2e-06,
+        "intercept": 71.837131
+      }
+    },
+    {
+      "rule_id": 74,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 91.057927,
+        "et0_fao_evapotranspiration": -84.765026,
+        "temperature_2m": 7.377368,
+        "relative_humidity_2m": -2.909813,
+        "clay_content": 36.167445,
+        "intercept": 36.167449
+      }
+    },
+    {
+      "rule_id": 75,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 91.057925,
+        "et0_fao_evapotranspiration": -84.765025,
+        "temperature_2m": 7.377368,
+        "relative_humidity_2m": -2.909813,
+        "clay_content": 36.167445,
+        "intercept": 36.167448
+      }
+    },
+    {
+      "rule_id": 76,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 87.282401,
+        "et0_fao_evapotranspiration": 70.052782,
+        "temperature_2m": 45.137016,
+        "relative_humidity_2m": 19.662486,
+        "clay_content": 1e-06,
+        "intercept": 19.190306
+      }
+    },
+    {
+      "rule_id": 77,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 72.42738,
+        "et0_fao_evapotranspiration": -8.182439,
+        "temperature_2m": -10.524263,
+        "relative_humidity_2m": -4.887615,
+        "clay_content": 12.479248,
+        "intercept": 12.479249
+      }
+    },
+    {
+      "rule_id": 78,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 72.427379,
+        "et0_fao_evapotranspiration": -8.182439,
+        "temperature_2m": -10.524262,
+        "relative_humidity_2m": -4.887614,
+        "clay_content": 12.479248,
+        "intercept": 12.479249
+      }
+    },
+    {
+      "rule_id": 79,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 42.632615,
+        "et0_fao_evapotranspiration": 65.751111,
+        "temperature_2m": 42.01089,
+        "relative_humidity_2m": 47.452052,
+        "clay_content": -1e-06,
+        "intercept": 65.869534
+      }
+    },
+    {
+      "rule_id": 80,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 150.964422,
+        "et0_fao_evapotranspiration": -4.855385,
+        "temperature_2m": 43.076551,
+        "relative_humidity_2m": 49.814537,
+        "clay_content": -25.802639,
+        "intercept": -25.802636
+      }
+    },
+    {
+      "rule_id": 81,
+      "antecedents": {
+        "soil_moisture_root_zone": "Low",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 150.96442,
+        "et0_fao_evapotranspiration": -4.855385,
+        "temperature_2m": 43.076551,
+        "relative_humidity_2m": 49.814536,
+        "clay_content": -25.802639,
+        "intercept": -25.802636
+      }
+    },
+    {
+      "rule_id": 82,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 145.62723,
+        "et0_fao_evapotranspiration": 11.116443,
+        "temperature_2m": 19.248399,
+        "relative_humidity_2m": -36.723384,
+        "clay_content": 2e-06,
+        "intercept": 2.972495
+      }
+    },
+    {
+      "rule_id": 83,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -37.319506,
+        "et0_fao_evapotranspiration": 27.400077,
+        "temperature_2m": 8.12576,
+        "relative_humidity_2m": -71.718465,
+        "clay_content": 44.858958,
+        "intercept": 44.858958
+      }
+    },
+    {
+      "rule_id": 84,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -37.319505,
+        "et0_fao_evapotranspiration": 27.400077,
+        "temperature_2m": 8.12576,
+        "relative_humidity_2m": -71.718464,
+        "clay_content": 44.858957,
+        "intercept": 44.858957
+      }
+    },
+    {
+      "rule_id": 85,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -32.054259,
+        "et0_fao_evapotranspiration": 24.357008,
+        "temperature_2m": 41.554301,
+        "relative_humidity_2m": -14.393663,
+        "clay_content": 1e-06,
+        "intercept": 88.613835
+      }
+    },
+    {
+      "rule_id": 86,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 18.673116,
+        "et0_fao_evapotranspiration": 12.555734,
+        "temperature_2m": -10.847703,
+        "relative_humidity_2m": 5.599405,
+        "clay_content": 18.685033,
+        "intercept": 18.685037
+      }
+    },
+    {
+      "rule_id": 87,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 18.673116,
+        "et0_fao_evapotranspiration": 12.555734,
+        "temperature_2m": -10.847702,
+        "relative_humidity_2m": 5.599405,
+        "clay_content": 18.685032,
+        "intercept": 18.685036
+      }
+    },
+    {
+      "rule_id": 88,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -0.008417,
+        "et0_fao_evapotranspiration": 2.793226,
+        "temperature_2m": 4.655253,
+        "relative_humidity_2m": -11.111528,
+        "clay_content": 1e-06,
+        "intercept": 84.15372
+      }
+    },
+    {
+      "rule_id": 89,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 50.849458,
+        "et0_fao_evapotranspiration": -20.193621,
+        "temperature_2m": -5.301579,
+        "relative_humidity_2m": -2.878442,
+        "clay_content": 14.049705,
+        "intercept": 14.049709
+      }
+    },
+    {
+      "rule_id": 90,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 50.849457,
+        "et0_fao_evapotranspiration": -20.193621,
+        "temperature_2m": -5.301579,
+        "relative_humidity_2m": -2.878442,
+        "clay_content": 14.049705,
+        "intercept": 14.049709
+      }
+    },
+    {
+      "rule_id": 91,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 31.860806,
+        "et0_fao_evapotranspiration": 21.849284,
+        "temperature_2m": 26.60891,
+        "relative_humidity_2m": 42.266224,
+        "clay_content": 3e-06,
+        "intercept": 12.837511
+      }
+    },
+    {
+      "rule_id": 92,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -109.190229,
+        "et0_fao_evapotranspiration": -332.695017,
+        "temperature_2m": 110.91982,
+        "relative_humidity_2m": -38.303195,
+        "clay_content": 73.342102,
+        "intercept": 73.342103
+      }
+    },
+    {
+      "rule_id": 93,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -109.190228,
+        "et0_fao_evapotranspiration": -332.695012,
+        "temperature_2m": 110.919819,
+        "relative_humidity_2m": -38.303195,
+        "clay_content": 73.342101,
+        "intercept": 73.342102
+      }
+    },
+    {
+      "rule_id": 94,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -12.924013,
+        "et0_fao_evapotranspiration": 53.511844,
+        "temperature_2m": 143.351672,
+        "relative_humidity_2m": 10.031563,
+        "clay_content": -2e-06,
+        "intercept": -20.820467
+      }
+    },
+    {
+      "rule_id": 95,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 62.480542,
+        "et0_fao_evapotranspiration": -20.694559,
+        "temperature_2m": 289.54075,
+        "relative_humidity_2m": -47.448248,
+        "clay_content": -52.579675,
+        "intercept": -52.579676
+      }
+    },
+    {
+      "rule_id": 96,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 62.480541,
+        "et0_fao_evapotranspiration": -20.694558,
+        "temperature_2m": 289.540745,
+        "relative_humidity_2m": -47.448247,
+        "clay_content": -52.579674,
+        "intercept": -52.579675
+      }
+    },
+    {
+      "rule_id": 97,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -9.62411,
+        "et0_fao_evapotranspiration": -128.970214,
+        "temperature_2m": 53.327907,
+        "relative_humidity_2m": 146.864625,
+        "clay_content": 0.0,
+        "intercept": -21.598726
+      }
+    },
+    {
+      "rule_id": 98,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 89.445189,
+        "et0_fao_evapotranspiration": -124.61175,
+        "temperature_2m": 58.433025,
+        "relative_humidity_2m": 52.004471,
+        "clay_content": 3.410842,
+        "intercept": 3.410841
+      }
+    },
+    {
+      "rule_id": 99,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 89.445187,
+        "et0_fao_evapotranspiration": -124.611748,
+        "temperature_2m": 58.433024,
+        "relative_humidity_2m": 52.004471,
+        "clay_content": 3.410842,
+        "intercept": 3.410841
+      }
+    },
+    {
+      "rule_id": 100,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -38.939887,
+        "et0_fao_evapotranspiration": -10.844679,
+        "temperature_2m": 18.681935,
+        "relative_humidity_2m": 16.100764,
+        "clay_content": -0.0,
+        "intercept": 89.460203
+      }
+    },
+    {
+      "rule_id": 101,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 269.821874,
+        "et0_fao_evapotranspiration": 60.131416,
+        "temperature_2m": -105.081953,
+        "relative_humidity_2m": -84.127719,
+        "clay_content": -2.374343,
+        "intercept": -2.374339
+      }
+    },
+    {
+      "rule_id": 102,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 269.82187,
+        "et0_fao_evapotranspiration": 60.131415,
+        "temperature_2m": -105.081951,
+        "relative_humidity_2m": -84.127718,
+        "clay_content": -2.374343,
+        "intercept": -2.374339
+      }
+    },
+    {
+      "rule_id": 103,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 41.361499,
+        "et0_fao_evapotranspiration": -75.275652,
+        "temperature_2m": 19.298637,
+        "relative_humidity_2m": 99.177227,
+        "clay_content": -5e-06,
+        "intercept": -4.996506
+      }
+    },
+    {
+      "rule_id": 104,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 298.759878,
+        "et0_fao_evapotranspiration": -597.304393,
+        "temperature_2m": 300.340974,
+        "relative_humidity_2m": 113.716428,
+        "clay_content": -118.976847,
+        "intercept": -118.976847
+      }
+    },
+    {
+      "rule_id": 105,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 298.759874,
+        "et0_fao_evapotranspiration": -597.304384,
+        "temperature_2m": 300.340969,
+        "relative_humidity_2m": 113.716426,
+        "clay_content": -118.976845,
+        "intercept": -118.976845
+      }
+    },
+    {
+      "rule_id": 106,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 42.14291,
+        "et0_fao_evapotranspiration": 21.161415,
+        "temperature_2m": 51.723734,
+        "relative_humidity_2m": 58.041686,
+        "clay_content": 2e-06,
+        "intercept": 52.814185
+      }
+    },
+    {
+      "rule_id": 107,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 70.530085,
+        "et0_fao_evapotranspiration": 5.260767,
+        "temperature_2m": 42.207423,
+        "relative_humidity_2m": 31.077128,
+        "clay_content": 47.283281,
+        "intercept": 47.283283
+      }
+    },
+    {
+      "rule_id": 108,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 70.530084,
+        "et0_fao_evapotranspiration": 5.260767,
+        "temperature_2m": 42.207422,
+        "relative_humidity_2m": 31.077127,
+        "clay_content": 47.28328,
+        "intercept": 47.283282
+      }
+    },
+    {
+      "rule_id": 109,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -67.057203,
+        "et0_fao_evapotranspiration": 184.158658,
+        "temperature_2m": 63.818247,
+        "relative_humidity_2m": -109.667516,
+        "clay_content": 3e-06,
+        "intercept": 14.202637
+      }
+    },
+    {
+      "rule_id": 110,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -125.140748,
+        "et0_fao_evapotranspiration": -28.857796,
+        "temperature_2m": 69.873208,
+        "relative_humidity_2m": -43.868302,
+        "clay_content": 72.999535,
+        "intercept": 72.999536
+      }
+    },
+    {
+      "rule_id": 111,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -125.140746,
+        "et0_fao_evapotranspiration": -28.857796,
+        "temperature_2m": 69.873207,
+        "relative_humidity_2m": -43.868302,
+        "clay_content": 72.999534,
+        "intercept": 72.999535
+      }
+    },
+    {
+      "rule_id": 112,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -30.461503,
+        "et0_fao_evapotranspiration": -73.459564,
+        "temperature_2m": 38.227309,
+        "relative_humidity_2m": -7.472015,
+        "clay_content": -0.0,
+        "intercept": 115.632538
+      }
+    },
+    {
+      "rule_id": 113,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 70.332805,
+        "et0_fao_evapotranspiration": 18.181654,
+        "temperature_2m": -23.878508,
+        "relative_humidity_2m": 28.425076,
+        "clay_content": -4.732166,
+        "intercept": -4.732161
+      }
+    },
+    {
+      "rule_id": 114,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 70.332804,
+        "et0_fao_evapotranspiration": 18.181654,
+        "temperature_2m": -23.878508,
+        "relative_humidity_2m": 28.425076,
+        "clay_content": -4.732166,
+        "intercept": -4.732161
+      }
+    },
+    {
+      "rule_id": 115,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 73.645356,
+        "et0_fao_evapotranspiration": -44.150802,
+        "temperature_2m": 0.446293,
+        "relative_humidity_2m": 34.37759,
+        "clay_content": 0.0,
+        "intercept": 10.396206
+      }
+    },
+    {
+      "rule_id": 116,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 130.096966,
+        "et0_fao_evapotranspiration": -25.564514,
+        "temperature_2m": -31.040458,
+        "relative_humidity_2m": -17.09589,
+        "clay_content": 2.976215,
+        "intercept": 2.976215
+      }
+    },
+    {
+      "rule_id": 117,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 130.096964,
+        "et0_fao_evapotranspiration": -25.564514,
+        "temperature_2m": -31.040458,
+        "relative_humidity_2m": -17.095889,
+        "clay_content": 2.976215,
+        "intercept": 2.976215
+      }
+    },
+    {
+      "rule_id": 118,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 110.676505,
+        "et0_fao_evapotranspiration": -44.126894,
+        "temperature_2m": -107.239062,
+        "relative_humidity_2m": 149.939348,
+        "clay_content": -1e-06,
+        "intercept": 45.816443
+      }
+    },
+    {
+      "rule_id": 119,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 102.669305,
+        "et0_fao_evapotranspiration": 31.297914,
+        "temperature_2m": 14.095075,
+        "relative_humidity_2m": -71.910192,
+        "clay_content": -11.962108,
+        "intercept": -11.962106
+      }
+    },
+    {
+      "rule_id": 120,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 102.669303,
+        "et0_fao_evapotranspiration": 31.297913,
+        "temperature_2m": 14.095075,
+        "relative_humidity_2m": -71.910191,
+        "clay_content": -11.962108,
+        "intercept": -11.962105
+      }
+    },
+    {
+      "rule_id": 121,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 126.608239,
+        "et0_fao_evapotranspiration": -9.8207,
+        "temperature_2m": -49.170219,
+        "relative_humidity_2m": 3.364479,
+        "clay_content": -1e-06,
+        "intercept": 4.108072
+      }
+    },
+    {
+      "rule_id": 122,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 210.167333,
+        "et0_fao_evapotranspiration": -24.788393,
+        "temperature_2m": 45.145428,
+        "relative_humidity_2m": -38.841739,
+        "clay_content": -26.412311,
+        "intercept": -26.41231
+      }
+    },
+    {
+      "rule_id": 123,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 210.16733,
+        "et0_fao_evapotranspiration": -24.788393,
+        "temperature_2m": 45.145427,
+        "relative_humidity_2m": -38.841739,
+        "clay_content": -26.41231,
+        "intercept": -26.41231
+      }
+    },
+    {
+      "rule_id": 124,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 69.30349,
+        "et0_fao_evapotranspiration": 46.826402,
+        "temperature_2m": 65.938874,
+        "relative_humidity_2m": -1.93383,
+        "clay_content": -2e-06,
+        "intercept": -37.269275
+      }
+    },
+    {
+      "rule_id": 125,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 160.088677,
+        "et0_fao_evapotranspiration": 22.69329,
+        "temperature_2m": 5.164453,
+        "relative_humidity_2m": 82.678428,
+        "clay_content": -50.239973,
+        "intercept": -50.239975
+      }
+    },
+    {
+      "rule_id": 126,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 160.088674,
+        "et0_fao_evapotranspiration": 22.693289,
+        "temperature_2m": 5.164453,
+        "relative_humidity_2m": 82.678427,
+        "clay_content": -50.239972,
+        "intercept": -50.239974
+      }
+    },
+    {
+      "rule_id": 127,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -1.407602,
+        "et0_fao_evapotranspiration": -20.051215,
+        "temperature_2m": -12.256973,
+        "relative_humidity_2m": -29.723415,
+        "clay_content": -1e-06,
+        "intercept": 96.164894
+      }
+    },
+    {
+      "rule_id": 128,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 39.020236,
+        "et0_fao_evapotranspiration": -62.830305,
+        "temperature_2m": 89.999136,
+        "relative_humidity_2m": 101.409693,
+        "clay_content": -13.616156,
+        "intercept": -13.616152
+      }
+    },
+    {
+      "rule_id": 129,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 39.020235,
+        "et0_fao_evapotranspiration": -62.830304,
+        "temperature_2m": 89.999135,
+        "relative_humidity_2m": 101.409691,
+        "clay_content": -13.616156,
+        "intercept": -13.616151
+      }
+    },
+    {
+      "rule_id": 130,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -6.953746,
+        "et0_fao_evapotranspiration": -2.999578,
+        "temperature_2m": -6.8105,
+        "relative_humidity_2m": 22.076306,
+        "clay_content": 2e-06,
+        "intercept": 72.365453
+      }
+    },
+    {
+      "rule_id": 131,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 28.657206,
+        "et0_fao_evapotranspiration": -89.602319,
+        "temperature_2m": -62.9342,
+        "relative_humidity_2m": 45.452049,
+        "clay_content": 53.230929,
+        "intercept": 53.230932
+      }
+    },
+    {
+      "rule_id": 132,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 28.657205,
+        "et0_fao_evapotranspiration": -89.602318,
+        "temperature_2m": -62.934199,
+        "relative_humidity_2m": 45.452048,
+        "clay_content": 53.230928,
+        "intercept": 53.230931
+      }
+    },
+    {
+      "rule_id": 133,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 86.917762,
+        "et0_fao_evapotranspiration": -33.27007,
+        "temperature_2m": 33.189978,
+        "relative_humidity_2m": -2.070037,
+        "clay_content": 1e-06,
+        "intercept": 6.748976
+      }
+    },
+    {
+      "rule_id": 134,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 100.233321,
+        "et0_fao_evapotranspiration": -136.777718,
+        "temperature_2m": 44.50075,
+        "relative_humidity_2m": -50.521422,
+        "clay_content": 25.336571,
+        "intercept": 25.336571
+      }
+    },
+    {
+      "rule_id": 135,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 100.23332,
+        "et0_fao_evapotranspiration": -136.777715,
+        "temperature_2m": 44.500749,
+        "relative_humidity_2m": -50.521421,
+        "clay_content": 25.33657,
+        "intercept": 25.336571
+      }
+    },
+    {
+      "rule_id": 136,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 13.493893,
+        "et0_fao_evapotranspiration": -8.935184,
+        "temperature_2m": 20.633948,
+        "relative_humidity_2m": -19.075084,
+        "clay_content": -3e-06,
+        "intercept": 18.558799
+      }
+    },
+    {
+      "rule_id": 137,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -73.240626,
+        "et0_fao_evapotranspiration": -66.644217,
+        "temperature_2m": -37.143602,
+        "relative_humidity_2m": -25.707449,
+        "clay_content": -66.079927,
+        "intercept": -66.079926
+      }
+    },
+    {
+      "rule_id": 138,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -73.240625,
+        "et0_fao_evapotranspiration": -66.644216,
+        "temperature_2m": -37.143601,
+        "relative_humidity_2m": -25.707449,
+        "clay_content": -66.079925,
+        "intercept": -66.079925
+      }
+    },
+    {
+      "rule_id": 139,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -120.515569,
+        "et0_fao_evapotranspiration": 93.965727,
+        "temperature_2m": 10.683741,
+        "relative_humidity_2m": -28.18557,
+        "clay_content": 2e-06,
+        "intercept": 80.450643
+      }
+    },
+    {
+      "rule_id": 140,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -82.922545,
+        "et0_fao_evapotranspiration": 91.315157,
+        "temperature_2m": 22.183423,
+        "relative_humidity_2m": -149.774835,
+        "clay_content": 44.585907,
+        "intercept": 44.585911
+      }
+    },
+    {
+      "rule_id": 141,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -82.922544,
+        "et0_fao_evapotranspiration": 91.315156,
+        "temperature_2m": 22.183423,
+        "relative_humidity_2m": -149.774833,
+        "clay_content": 44.585907,
+        "intercept": 44.58591
+      }
+    },
+    {
+      "rule_id": 142,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 25.575099,
+        "et0_fao_evapotranspiration": -1.041042,
+        "temperature_2m": -55.605645,
+        "relative_humidity_2m": 23.721499,
+        "clay_content": 4e-06,
+        "intercept": 73.81082
+      }
+    },
+    {
+      "rule_id": 143,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -40.026649,
+        "et0_fao_evapotranspiration": -157.387106,
+        "temperature_2m": -77.605589,
+        "relative_humidity_2m": 41.291845,
+        "clay_content": 94.069834,
+        "intercept": 94.069837
+      }
+    },
+    {
+      "rule_id": 144,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -40.026648,
+        "et0_fao_evapotranspiration": -157.387104,
+        "temperature_2m": -77.605588,
+        "relative_humidity_2m": 41.291845,
+        "clay_content": 94.069832,
+        "intercept": 94.069836
+      }
+    },
+    {
+      "rule_id": 145,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -64.868847,
+        "et0_fao_evapotranspiration": 271.568325,
+        "temperature_2m": -85.780188,
+        "relative_humidity_2m": 49.183874,
+        "clay_content": 2e-06,
+        "intercept": -28.987898
+      }
+    },
+    {
+      "rule_id": 146,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 22.922057,
+        "et0_fao_evapotranspiration": -64.880312,
+        "temperature_2m": -42.514699,
+        "relative_humidity_2m": 195.621221,
+        "clay_content": 37.517192,
+        "intercept": 37.51719
+      }
+    },
+    {
+      "rule_id": 147,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 22.922057,
+        "et0_fao_evapotranspiration": -64.880311,
+        "temperature_2m": -42.514698,
+        "relative_humidity_2m": 195.621218,
+        "clay_content": 37.517191,
+        "intercept": 37.51719
+      }
+    },
+    {
+      "rule_id": 148,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 128.542783,
+        "et0_fao_evapotranspiration": -32.282529,
+        "temperature_2m": 163.880604,
+        "relative_humidity_2m": -35.899575,
+        "clay_content": -2e-06,
+        "intercept": -61.198863
+      }
+    },
+    {
+      "rule_id": 149,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 51.115218,
+        "et0_fao_evapotranspiration": 95.666418,
+        "temperature_2m": -8.845636,
+        "relative_humidity_2m": 100.419571,
+        "clay_content": -51.126478,
+        "intercept": -51.126481
+      }
+    },
+    {
+      "rule_id": 150,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 51.115217,
+        "et0_fao_evapotranspiration": 95.666417,
+        "temperature_2m": -8.845636,
+        "relative_humidity_2m": 100.419569,
+        "clay_content": -51.126477,
+        "intercept": -51.12648
+      }
+    },
+    {
+      "rule_id": 151,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -57.335374,
+        "et0_fao_evapotranspiration": -3.399208,
+        "temperature_2m": -51.858184,
+        "relative_humidity_2m": -42.959487,
+        "clay_content": 2e-06,
+        "intercept": 155.066735
+      }
+    },
+    {
+      "rule_id": 152,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 70.076689,
+        "et0_fao_evapotranspiration": -162.569559,
+        "temperature_2m": 28.787129,
+        "relative_humidity_2m": 47.568475,
+        "clay_content": 44.921751,
+        "intercept": 44.921758
+      }
+    },
+    {
+      "rule_id": 153,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 70.076688,
+        "et0_fao_evapotranspiration": -162.569557,
+        "temperature_2m": 28.787129,
+        "relative_humidity_2m": 47.568474,
+        "clay_content": 44.92175,
+        "intercept": 44.921757
+      }
+    },
+    {
+      "rule_id": 154,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 121.781664,
+        "et0_fao_evapotranspiration": -36.825254,
+        "temperature_2m": 0.173806,
+        "relative_humidity_2m": 12.775613,
+        "clay_content": 2e-06,
+        "intercept": 13.429053
+      }
+    },
+    {
+      "rule_id": 155,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -54.452641,
+        "et0_fao_evapotranspiration": -1.493646,
+        "temperature_2m": 13.534633,
+        "relative_humidity_2m": -20.412367,
+        "clay_content": 40.668849,
+        "intercept": 40.668849
+      }
+    },
+    {
+      "rule_id": 156,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -54.452641,
+        "et0_fao_evapotranspiration": -1.493646,
+        "temperature_2m": 13.534633,
+        "relative_humidity_2m": -20.412367,
+        "clay_content": 40.668848,
+        "intercept": 40.668849
+      }
+    },
+    {
+      "rule_id": 157,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 96.81674,
+        "et0_fao_evapotranspiration": -20.138298,
+        "temperature_2m": 113.974891,
+        "relative_humidity_2m": 28.466479,
+        "clay_content": 4e-06,
+        "intercept": -79.951874
+      }
+    },
+    {
+      "rule_id": 158,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -57.327991,
+        "et0_fao_evapotranspiration": -76.524916,
+        "temperature_2m": 0.192904,
+        "relative_humidity_2m": -3.081765,
+        "clay_content": 78.674704,
+        "intercept": 78.6747
+      }
+    },
+    {
+      "rule_id": 159,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -57.32799,
+        "et0_fao_evapotranspiration": -76.524915,
+        "temperature_2m": 0.192904,
+        "relative_humidity_2m": -3.081765,
+        "clay_content": 78.674703,
+        "intercept": 78.674699
+      }
+    },
+    {
+      "rule_id": 160,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 50.840985,
+        "et0_fao_evapotranspiration": -45.774831,
+        "temperature_2m": 44.307955,
+        "relative_humidity_2m": 24.315028,
+        "clay_content": 1e-06,
+        "intercept": 23.342268
+      }
+    },
+    {
+      "rule_id": 161,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -193.383735,
+        "et0_fao_evapotranspiration": 31.977699,
+        "temperature_2m": 37.404538,
+        "relative_humidity_2m": 64.873014,
+        "clay_content": 31.94851,
+        "intercept": 31.948511
+      }
+    },
+    {
+      "rule_id": 162,
+      "antecedents": {
+        "soil_moisture_root_zone": "Medium",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -193.383732,
+        "et0_fao_evapotranspiration": 31.977698,
+        "temperature_2m": 37.404538,
+        "relative_humidity_2m": 64.873013,
+        "clay_content": 31.948509,
+        "intercept": 31.94851
+      }
+    },
+    {
+      "rule_id": 163,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 80.098146,
+        "et0_fao_evapotranspiration": -4.263842,
+        "temperature_2m": -27.859101,
+        "relative_humidity_2m": -165.406903,
+        "clay_content": 1e-06,
+        "intercept": 85.482704
+      }
+    },
+    {
+      "rule_id": 164,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 18.354658,
+        "et0_fao_evapotranspiration": 0.17181,
+        "temperature_2m": 56.516739,
+        "relative_humidity_2m": 22.653762,
+        "clay_content": 25.279754,
+        "intercept": 25.279758
+      }
+    },
+    {
+      "rule_id": 165,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 18.354657,
+        "et0_fao_evapotranspiration": 0.17181,
+        "temperature_2m": 56.516738,
+        "relative_humidity_2m": 22.653761,
+        "clay_content": 25.279754,
+        "intercept": 25.279758
+      }
+    },
+    {
+      "rule_id": 166,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 39.41957,
+        "et0_fao_evapotranspiration": 13.008053,
+        "temperature_2m": -28.481834,
+        "relative_humidity_2m": 2.437643,
+        "clay_content": 2e-06,
+        "intercept": 51.829544
+      }
+    },
+    {
+      "rule_id": 167,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -1.664789,
+        "et0_fao_evapotranspiration": 7.899884,
+        "temperature_2m": -7.995318,
+        "relative_humidity_2m": -1.31474,
+        "clay_content": 46.894247,
+        "intercept": 46.894249
+      }
+    },
+    {
+      "rule_id": 168,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -1.664789,
+        "et0_fao_evapotranspiration": 7.899883,
+        "temperature_2m": -7.995318,
+        "relative_humidity_2m": -1.31474,
+        "clay_content": 46.894246,
+        "intercept": 46.894248
+      }
+    },
+    {
+      "rule_id": 169,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 31.297388,
+        "et0_fao_evapotranspiration": 8.878003,
+        "temperature_2m": -11.090854,
+        "relative_humidity_2m": 6.825825,
+        "clay_content": 2e-06,
+        "intercept": 46.408686
+      }
+    },
+    {
+      "rule_id": 170,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -1.113653,
+        "et0_fao_evapotranspiration": -11.823016,
+        "temperature_2m": -18.793156,
+        "relative_humidity_2m": 3.579473,
+        "clay_content": 48.340702,
+        "intercept": 48.340704
+      }
+    },
+    {
+      "rule_id": 171,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -1.113653,
+        "et0_fao_evapotranspiration": -11.823016,
+        "temperature_2m": -18.793155,
+        "relative_humidity_2m": 3.579473,
+        "clay_content": 48.340701,
+        "intercept": 48.340703
+      }
+    },
+    {
+      "rule_id": 172,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 40.348797,
+        "et0_fao_evapotranspiration": 131.168479,
+        "temperature_2m": -69.151154,
+        "relative_humidity_2m": 109.070706,
+        "clay_content": 0.0,
+        "intercept": 11.782057
+      }
+    },
+    {
+      "rule_id": 173,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 58.142133,
+        "et0_fao_evapotranspiration": 55.62643,
+        "temperature_2m": 21.37458,
+        "relative_humidity_2m": -39.571332,
+        "clay_content": 6.307529,
+        "intercept": 6.30753
+      }
+    },
+    {
+      "rule_id": 174,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 58.142132,
+        "et0_fao_evapotranspiration": 55.62643,
+        "temperature_2m": 21.37458,
+        "relative_humidity_2m": -39.571332,
+        "clay_content": 6.307529,
+        "intercept": 6.30753
+      }
+    },
+    {
+      "rule_id": 175,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -163.220267,
+        "et0_fao_evapotranspiration": -43.289731,
+        "temperature_2m": 84.79274,
+        "relative_humidity_2m": 47.646557,
+        "clay_content": 0.0,
+        "intercept": 148.597458
+      }
+    },
+    {
+      "rule_id": 176,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 30.63056,
+        "et0_fao_evapotranspiration": -23.260828,
+        "temperature_2m": -9.836369,
+        "relative_humidity_2m": 106.047803,
+        "clay_content": 8.046672,
+        "intercept": 8.046678
+      }
+    },
+    {
+      "rule_id": 177,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 30.630559,
+        "et0_fao_evapotranspiration": -23.260827,
+        "temperature_2m": -9.836369,
+        "relative_humidity_2m": 106.047802,
+        "clay_content": 8.046672,
+        "intercept": 8.046678
+      }
+    },
+    {
+      "rule_id": 178,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 30.763064,
+        "et0_fao_evapotranspiration": -130.369267,
+        "temperature_2m": 127.152128,
+        "relative_humidity_2m": -56.795094,
+        "clay_content": -1e-06,
+        "intercept": 64.666408
+      }
+    },
+    {
+      "rule_id": 179,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 127.585458,
+        "et0_fao_evapotranspiration": -21.063742,
+        "temperature_2m": 96.107069,
+        "relative_humidity_2m": -35.690208,
+        "clay_content": -24.291799,
+        "intercept": -24.291796
+      }
+    },
+    {
+      "rule_id": 180,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 127.585456,
+        "et0_fao_evapotranspiration": -21.063741,
+        "temperature_2m": 96.107068,
+        "relative_humidity_2m": -35.690207,
+        "clay_content": -24.291799,
+        "intercept": -24.291796
+      }
+    },
+    {
+      "rule_id": 181,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -19.931005,
+        "et0_fao_evapotranspiration": 6.64781,
+        "temperature_2m": 39.944861,
+        "relative_humidity_2m": 31.503096,
+        "clay_content": 2e-06,
+        "intercept": 58.170073
+      }
+    },
+    {
+      "rule_id": 182,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -13.797127,
+        "et0_fao_evapotranspiration": 56.204175,
+        "temperature_2m": -17.135999,
+        "relative_humidity_2m": -44.792543,
+        "clay_content": 50.951612,
+        "intercept": 50.951614
+      }
+    },
+    {
+      "rule_id": 183,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -13.797127,
+        "et0_fao_evapotranspiration": 56.204174,
+        "temperature_2m": -17.135998,
+        "relative_humidity_2m": -44.792542,
+        "clay_content": 50.951611,
+        "intercept": 50.951614
+      }
+    },
+    {
+      "rule_id": 184,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 63.356323,
+        "et0_fao_evapotranspiration": 60.516,
+        "temperature_2m": 26.437132,
+        "relative_humidity_2m": 14.466778,
+        "clay_content": 2e-06,
+        "intercept": -19.144817
+      }
+    },
+    {
+      "rule_id": 185,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -173.725168,
+        "et0_fao_evapotranspiration": 53.413192,
+        "temperature_2m": 136.268147,
+        "relative_humidity_2m": 98.635323,
+        "clay_content": 46.81907,
+        "intercept": 46.81907
+      }
+    },
+    {
+      "rule_id": 186,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -173.725165,
+        "et0_fao_evapotranspiration": 53.413191,
+        "temperature_2m": 136.268144,
+        "relative_humidity_2m": 98.635321,
+        "clay_content": 46.81907,
+        "intercept": 46.819069
+      }
+    },
+    {
+      "rule_id": 187,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 21.216748,
+        "et0_fao_evapotranspiration": 14.70525,
+        "temperature_2m": 27.920942,
+        "relative_humidity_2m": 23.122643,
+        "clay_content": 1e-06,
+        "intercept": 36.286245
+      }
+    },
+    {
+      "rule_id": 188,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 17.623257,
+        "et0_fao_evapotranspiration": 1.529004,
+        "temperature_2m": 13.778198,
+        "relative_humidity_2m": 30.611149,
+        "clay_content": 19.772898,
+        "intercept": 19.772899
+      }
+    },
+    {
+      "rule_id": 189,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Low",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 17.623257,
+        "et0_fao_evapotranspiration": 1.529004,
+        "temperature_2m": 13.778197,
+        "relative_humidity_2m": 30.611148,
+        "clay_content": 19.772897,
+        "intercept": 19.772899
+      }
+    },
+    {
+      "rule_id": 190,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 51.097146,
+        "et0_fao_evapotranspiration": 137.034808,
+        "temperature_2m": -131.701756,
+        "relative_humidity_2m": -53.167406,
+        "clay_content": 1e-06,
+        "intercept": 46.380503
+      }
+    },
+    {
+      "rule_id": 191,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 51.120122,
+        "et0_fao_evapotranspiration": 67.437633,
+        "temperature_2m": -97.861392,
+        "relative_humidity_2m": 25.426743,
+        "clay_content": 13.892072,
+        "intercept": 13.892074
+      }
+    },
+    {
+      "rule_id": 192,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 51.120121,
+        "et0_fao_evapotranspiration": 67.437632,
+        "temperature_2m": -97.861391,
+        "relative_humidity_2m": 25.426742,
+        "clay_content": 13.892072,
+        "intercept": 13.892074
+      }
+    },
+    {
+      "rule_id": 193,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -79.206849,
+        "et0_fao_evapotranspiration": 35.813189,
+        "temperature_2m": 30.519854,
+        "relative_humidity_2m": -23.19919,
+        "clay_content": 2e-06,
+        "intercept": 114.367755
+      }
+    },
+    {
+      "rule_id": 194,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 60.678275,
+        "et0_fao_evapotranspiration": -8.77272,
+        "temperature_2m": -31.327722,
+        "relative_humidity_2m": -49.788682,
+        "clay_content": 39.721711,
+        "intercept": 39.721716
+      }
+    },
+    {
+      "rule_id": 195,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 60.678274,
+        "et0_fao_evapotranspiration": -8.77272,
+        "temperature_2m": -31.327722,
+        "relative_humidity_2m": -49.788681,
+        "clay_content": 39.72171,
+        "intercept": 39.721715
+      }
+    },
+    {
+      "rule_id": 196,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 4.085394,
+        "et0_fao_evapotranspiration": -32.141326,
+        "temperature_2m": 33.761538,
+        "relative_humidity_2m": -31.881882,
+        "clay_content": 2e-06,
+        "intercept": 95.166423
+      }
+    },
+    {
+      "rule_id": 197,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 11.098355,
+        "et0_fao_evapotranspiration": 1.900793,
+        "temperature_2m": -3.675134,
+        "relative_humidity_2m": -29.688531,
+        "clay_content": 50.980506,
+        "intercept": 50.98051
+      }
+    },
+    {
+      "rule_id": 198,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 11.098355,
+        "et0_fao_evapotranspiration": 1.900793,
+        "temperature_2m": -3.675134,
+        "relative_humidity_2m": -29.688531,
+        "clay_content": 50.980505,
+        "intercept": 50.98051
+      }
+    },
+    {
+      "rule_id": 199,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -44.677034,
+        "et0_fao_evapotranspiration": -9.603595,
+        "temperature_2m": 29.810079,
+        "relative_humidity_2m": 24.094528,
+        "clay_content": 2e-06,
+        "intercept": 88.703017
+      }
+    },
+    {
+      "rule_id": 200,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 79.739484,
+        "et0_fao_evapotranspiration": -149.510052,
+        "temperature_2m": 26.900218,
+        "relative_humidity_2m": 13.831728,
+        "clay_content": 34.542514,
+        "intercept": 34.542518
+      }
+    },
+    {
+      "rule_id": 201,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 79.739483,
+        "et0_fao_evapotranspiration": -149.51005,
+        "temperature_2m": 26.900218,
+        "relative_humidity_2m": 13.831727,
+        "clay_content": 34.542514,
+        "intercept": 34.542518
+      }
+    },
+    {
+      "rule_id": 202,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 134.482457,
+        "et0_fao_evapotranspiration": 20.691785,
+        "temperature_2m": -127.060302,
+        "relative_humidity_2m": 20.422283,
+        "clay_content": 2e-06,
+        "intercept": 18.039197
+      }
+    },
+    {
+      "rule_id": 203,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -23.74643,
+        "et0_fao_evapotranspiration": 69.544749,
+        "temperature_2m": -26.514241,
+        "relative_humidity_2m": -13.185307,
+        "clay_content": 43.598781,
+        "intercept": 43.598782
+      }
+    },
+    {
+      "rule_id": 204,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -23.746429,
+        "et0_fao_evapotranspiration": 69.544748,
+        "temperature_2m": -26.514241,
+        "relative_humidity_2m": -13.185307,
+        "clay_content": 43.59878,
+        "intercept": 43.598781
+      }
+    },
+    {
+      "rule_id": 205,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 201.047345,
+        "et0_fao_evapotranspiration": -79.753499,
+        "temperature_2m": -17.773096,
+        "relative_humidity_2m": -13.758962,
+        "clay_content": 1e-06,
+        "intercept": -33.971481
+      }
+    },
+    {
+      "rule_id": 206,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 30.032013,
+        "et0_fao_evapotranspiration": 7.410923,
+        "temperature_2m": 9.71261,
+        "relative_humidity_2m": -11.327789,
+        "clay_content": 27.521268,
+        "intercept": 27.521267
+      }
+    },
+    {
+      "rule_id": 207,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 30.032013,
+        "et0_fao_evapotranspiration": 7.410922,
+        "temperature_2m": 9.71261,
+        "relative_humidity_2m": -11.327789,
+        "clay_content": 27.521268,
+        "intercept": 27.521266
+      }
+    },
+    {
+      "rule_id": 208,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 5.9615,
+        "et0_fao_evapotranspiration": 24.912627,
+        "temperature_2m": -59.009554,
+        "relative_humidity_2m": -58.949902,
+        "clay_content": 2e-06,
+        "intercept": 111.758382
+      }
+    },
+    {
+      "rule_id": 209,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 1.773093,
+        "et0_fao_evapotranspiration": 22.782743,
+        "temperature_2m": -29.445062,
+        "relative_humidity_2m": -24.654633,
+        "clay_content": 47.644671,
+        "intercept": 47.644676
+      }
+    },
+    {
+      "rule_id": 210,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 1.773093,
+        "et0_fao_evapotranspiration": 22.782742,
+        "temperature_2m": -29.445062,
+        "relative_humidity_2m": -24.654632,
+        "clay_content": 47.64467,
+        "intercept": 47.644675
+      }
+    },
+    {
+      "rule_id": 211,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 16.030864,
+        "et0_fao_evapotranspiration": -53.811715,
+        "temperature_2m": 30.474951,
+        "relative_humidity_2m": -53.376995,
+        "clay_content": 2e-06,
+        "intercept": 86.332714
+      }
+    },
+    {
+      "rule_id": 212,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 21.466073,
+        "et0_fao_evapotranspiration": -9.107678,
+        "temperature_2m": -1.943027,
+        "relative_humidity_2m": -15.408327,
+        "clay_content": 37.594695,
+        "intercept": 37.594699
+      }
+    },
+    {
+      "rule_id": 213,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 21.466073,
+        "et0_fao_evapotranspiration": -9.107678,
+        "temperature_2m": -1.943027,
+        "relative_humidity_2m": -15.408327,
+        "clay_content": 37.594694,
+        "intercept": 37.594698
+      }
+    },
+    {
+      "rule_id": 214,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -105.406866,
+        "et0_fao_evapotranspiration": 85.40419,
+        "temperature_2m": 36.147002,
+        "relative_humidity_2m": 35.117696,
+        "clay_content": 0.0,
+        "intercept": 59.735047
+      }
+    },
+    {
+      "rule_id": 215,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 73.118547,
+        "et0_fao_evapotranspiration": -33.988639,
+        "temperature_2m": 57.87974,
+        "relative_humidity_2m": -13.304518,
+        "clay_content": 3.772726,
+        "intercept": 3.772728
+      }
+    },
+    {
+      "rule_id": 216,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "Medium",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 73.118546,
+        "et0_fao_evapotranspiration": -33.988639,
+        "temperature_2m": 57.879739,
+        "relative_humidity_2m": -13.304517,
+        "clay_content": 3.772726,
+        "intercept": 3.772728
+      }
+    },
+    {
+      "rule_id": 217,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -15.62921,
+        "et0_fao_evapotranspiration": -20.457292,
+        "temperature_2m": 1.984155,
+        "relative_humidity_2m": -19.852726,
+        "clay_content": 3e-06,
+        "intercept": 17.884138
+      }
+    },
+    {
+      "rule_id": 218,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 37.596282,
+        "et0_fao_evapotranspiration": 15.744205,
+        "temperature_2m": 18.404179,
+        "relative_humidity_2m": 11.449612,
+        "clay_content": 55.578645,
+        "intercept": 55.578646
+      }
+    },
+    {
+      "rule_id": 219,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 37.596281,
+        "et0_fao_evapotranspiration": 15.744205,
+        "temperature_2m": 18.404178,
+        "relative_humidity_2m": 11.449612,
+        "clay_content": 55.578644,
+        "intercept": 55.578645
+      }
+    },
+    {
+      "rule_id": 220,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 75.651602,
+        "et0_fao_evapotranspiration": -27.241241,
+        "temperature_2m": 0.804208,
+        "relative_humidity_2m": 5.01038,
+        "clay_content": 1e-06,
+        "intercept": 57.251989
+      }
+    },
+    {
+      "rule_id": 221,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -47.902815,
+        "et0_fao_evapotranspiration": 135.743286,
+        "temperature_2m": -8.178703,
+        "relative_humidity_2m": -15.426957,
+        "clay_content": 20.783856,
+        "intercept": 20.783858
+      }
+    },
+    {
+      "rule_id": 222,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -47.902814,
+        "et0_fao_evapotranspiration": 135.743284,
+        "temperature_2m": -8.178702,
+        "relative_humidity_2m": -15.426957,
+        "clay_content": 20.783855,
+        "intercept": 20.783858
+      }
+    },
+    {
+      "rule_id": 223,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 95.313098,
+        "et0_fao_evapotranspiration": 83.009474,
+        "temperature_2m": -225.638952,
+        "relative_humidity_2m": 49.416258,
+        "clay_content": 2e-06,
+        "intercept": 5.21945
+      }
+    },
+    {
+      "rule_id": 224,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -14.052743,
+        "et0_fao_evapotranspiration": 100.513576,
+        "temperature_2m": -120.825643,
+        "relative_humidity_2m": 0.767373,
+        "clay_content": 38.947563,
+        "intercept": 38.947563
+      }
+    },
+    {
+      "rule_id": 225,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Low",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -14.052743,
+        "et0_fao_evapotranspiration": 100.513574,
+        "temperature_2m": -120.825641,
+        "relative_humidity_2m": 0.767373,
+        "clay_content": 38.947562,
+        "intercept": 38.947562
+      }
+    },
+    {
+      "rule_id": 226,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 369.813813,
+        "et0_fao_evapotranspiration": -102.571546,
+        "temperature_2m": -22.026339,
+        "relative_humidity_2m": -46.011585,
+        "clay_content": 5e-06,
+        "intercept": -108.444097
+      }
+    },
+    {
+      "rule_id": 227,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -61.954834,
+        "et0_fao_evapotranspiration": -52.219369,
+        "temperature_2m": -24.102325,
+        "relative_humidity_2m": -95.745297,
+        "clay_content": 119.836262,
+        "intercept": 119.836257
+      }
+    },
+    {
+      "rule_id": 228,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -61.954833,
+        "et0_fao_evapotranspiration": -52.219368,
+        "temperature_2m": -24.102324,
+        "relative_humidity_2m": -95.745296,
+        "clay_content": 119.83626,
+        "intercept": 119.836255
+      }
+    },
+    {
+      "rule_id": 229,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 132.833178,
+        "et0_fao_evapotranspiration": -37.492044,
+        "temperature_2m": 121.962108,
+        "relative_humidity_2m": -73.099961,
+        "clay_content": -1e-06,
+        "intercept": -37.717607
+      }
+    },
+    {
+      "rule_id": 230,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 54.678831,
+        "et0_fao_evapotranspiration": 34.340805,
+        "temperature_2m": 53.814668,
+        "relative_humidity_2m": 10.990249,
+        "clay_content": -15.912908,
+        "intercept": -15.91291
+      }
+    },
+    {
+      "rule_id": 231,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 54.67883,
+        "et0_fao_evapotranspiration": 34.340804,
+        "temperature_2m": 53.814667,
+        "relative_humidity_2m": 10.990249,
+        "clay_content": -15.912908,
+        "intercept": -15.91291
+      }
+    },
+    {
+      "rule_id": 232,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 100.697975,
+        "et0_fao_evapotranspiration": -77.921758,
+        "temperature_2m": -178.105634,
+        "relative_humidity_2m": -72.619646,
+        "clay_content": 4e-06,
+        "intercept": 243.737077
+      }
+    },
+    {
+      "rule_id": 233,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -48.913785,
+        "et0_fao_evapotranspiration": -36.679297,
+        "temperature_2m": -9.653679,
+        "relative_humidity_2m": -35.289935,
+        "clay_content": 91.006306,
+        "intercept": 91.006317
+      }
+    },
+    {
+      "rule_id": 234,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "Medium",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -48.913784,
+        "et0_fao_evapotranspiration": -36.679297,
+        "temperature_2m": -9.653679,
+        "relative_humidity_2m": -35.289935,
+        "clay_content": 91.006305,
+        "intercept": 91.006315
+      }
+    },
+    {
+      "rule_id": 235,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 60.839269,
+        "et0_fao_evapotranspiration": 3.018483,
+        "temperature_2m": -49.238821,
+        "relative_humidity_2m": -11.34001,
+        "clay_content": 1e-06,
+        "intercept": 58.425597
+      }
+    },
+    {
+      "rule_id": 236,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 33.633066,
+        "et0_fao_evapotranspiration": -0.979354,
+        "temperature_2m": 3.108945,
+        "relative_humidity_2m": 8.94179,
+        "clay_content": 25.421559,
+        "intercept": 25.421561
+      }
+    },
+    {
+      "rule_id": 237,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Low",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 33.633065,
+        "et0_fao_evapotranspiration": -0.979354,
+        "temperature_2m": 3.108944,
+        "relative_humidity_2m": 8.941789,
+        "clay_content": 25.421559,
+        "intercept": 25.421561
+      }
+    },
+    {
+      "rule_id": 238,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 113.508351,
+        "et0_fao_evapotranspiration": -71.922408,
+        "temperature_2m": -12.743985,
+        "relative_humidity_2m": -5.764071,
+        "clay_content": 1e-06,
+        "intercept": 54.05222
+      }
+    },
+    {
+      "rule_id": 239,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 8.084728,
+        "et0_fao_evapotranspiration": -5.001194,
+        "temperature_2m": 30.515624,
+        "relative_humidity_2m": 7.838755,
+        "clay_content": 28.520585,
+        "intercept": 28.520587
+      }
+    },
+    {
+      "rule_id": 240,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "Medium",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": 8.084728,
+        "et0_fao_evapotranspiration": -5.001194,
+        "temperature_2m": 30.515624,
+        "relative_humidity_2m": 7.838754,
+        "clay_content": 28.520584,
+        "intercept": 28.520587
+      }
+    },
+    {
+      "rule_id": 241,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "Low"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -125.990399,
+        "et0_fao_evapotranspiration": 29.100209,
+        "temperature_2m": 152.040052,
+        "relative_humidity_2m": -45.5836,
+        "clay_content": 2e-06,
+        "intercept": 65.439106
+      }
+    },
+    {
+      "rule_id": 242,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "Medium"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -65.478004,
+        "et0_fao_evapotranspiration": -20.874917,
+        "temperature_2m": 66.933913,
+        "relative_humidity_2m": 43.011517,
+        "clay_content": 45.550833,
+        "intercept": 45.550836
+      }
+    },
+    {
+      "rule_id": 243,
+      "antecedents": {
+        "soil_moisture_root_zone": "High",
+        "et0_fao_evapotranspiration": "High",
+        "temperature_2m": "High",
+        "relative_humidity_2m": "High",
+        "clay_content": "High"
+      },
+      "consequent": {
+        "soil_moisture_root_zone": -65.478003,
+        "et0_fao_evapotranspiration": -20.874917,
+        "temperature_2m": 66.933912,
+        "relative_humidity_2m": 43.011517,
+        "clay_content": 45.550833,
+        "intercept": 45.550836
+      }
+    }
+  ]
+}

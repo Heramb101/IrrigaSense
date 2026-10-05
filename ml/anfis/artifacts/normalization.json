@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "description": "ANFIS input normalization parameters fitted strictly on training partition.",
+    "scaling_method": "min_max_scaling",
+    "training_sample_count": 32905,
+    "source_derived_matrix_sha256": "6998dad4e4e2c274d9179a6c2a19cf53081e57e12f1e2ef3d31a822e40ca5ea0",
+    "formula": "x_norm = (x - min) / (max - min)",
+    "target_normalized": false,
+    "target_variable": "target_mean_24h",
+    "target_unit": "% VWC"
+  },
+  "features": {
+    "soil_moisture_root_zone": {
+      "unit": "% VWC",
+      "train_min": 3.0,
+      "train_max": 100.0,
+      "train_mean": 55.8722,
+      "train_std": 25.3607,
+      "train_q25": 24.0,
+      "train_q50": 61.0,
+      "train_q75": 78.0,
+      "transformed_range": [
+        0.0,
+        1.0
+      ],
+      "scale_factor": 97.0
+    },
+    "et0_fao_evapotranspiration": {
+      "unit": "mm/day",
+      "train_min": 0.0,
+      "train_max": 7.792902103257189,
+      "train_mean": 4.3329,
+      "train_std": 1.8542,
+      "train_q25": 3.0804,
+      "train_q50": 4.5877,
+      "train_q75": 5.8996,
+      "transformed_range": [
+        0.0,
+        1.0
+      ],
+      "scale_factor": 7.792902
+    },
+    "temperature_2m": {
+      "unit": "\u00b0C",
+      "train_min": 1.7641666666666669,
+      "train_max": 41.285,
+      "train_mean": 24.8642,
+      "train_std": 6.641,
+      "train_q25": 21.0225,
+      "train_q50": 25.1642,
+      "train_q75": 29.9617,
+      "transformed_range": [
+        0.0,
+        1.0
+      ],
+      "scale_factor": 39.520833
+    },
+    "relative_humidity_2m": {
+      "unit": "%",
+      "train_min": 12.0,
+      "train_max": 100.0,
+      "train_mean": 56.7325,
+      "train_std": 19.9148,
+      "train_q25": 40.275,
+      "train_q50": 55.6333,
+      "train_q75": 72.45,
+      "transformed_range": [
+        0.0,
+        1.0
+      ],
+      "scale_factor": 88.0
+    },
+    "clay_content": {
+      "unit": "%",
+      "train_min": 0.0,
+      "train_max": 22.6,
+      "train_mean": 16.4316,
+      "train_std": 10.0677,
+      "train_q25": 0.0,
+      "train_q50": 22.6,
+      "train_q75": 22.6,
+      "transformed_range": [
+        0.0,
+        1.0
+      ],
+      "scale_factor": 22.6
+    }
+  }
+}

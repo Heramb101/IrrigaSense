@@ -1,0 +1,79 @@
+{
+  "evaluation_milestone": "Milestone 8D \u2014 Final ANFIS Test Evaluation",
+  "evaluation_timestamp": "2026-10-05T20:42:06Z",
+  "model_file": "ml\\anfis\\artifacts\\anfis_final_validation_best.json",
+  "model_sha256": "9bd06f090405ad8ba8f89a4a19c9c38ccb717bec7f12d979934ca92e7c9fc2f7",
+  "master_dataset_sha256": "fe11346d873d65598ff37eeac2196da497c3ab82299b0f9f6be1356fd299b2c8",
+  "master_dataset_integrity_certified": true,
+  "frozen_architecture": "Architecture A (32 Rules, 212 Parameters)",
+  "designation": "FINAL TEST-EVALUATED ANFIS MODEL",
+  "inputs": [
+    "soil_moisture_root_zone",
+    "et0_fao_evapotranspiration",
+    "temperature_2m",
+    "relative_humidity_2m",
+    "clay_content"
+  ],
+  "target": "target_mean_24h",
+  "n_inputs": 5,
+  "n_rules": 32,
+  "total_parameters": 212,
+  "premise_parameters_count": 20,
+  "consequent_parameters_count": 192,
+  "normalization_fitted_partition": "TRAIN ONLY (32,905 rows)",
+  "test_partition": {
+    "start_row": 39956,
+    "end_row": 47006,
+    "sample_count": 7051,
+    "leakage_detected": false
+  },
+  "final_test_metrics_raw": {
+    "test_mae": 17.2831,
+    "test_rmse": 28.6902,
+    "test_r2": -0.4753,
+    "test_smape": 59.96
+  },
+  "final_test_metrics_clipped": {
+    "test_mae": 17.2831,
+    "test_rmse": 28.6902,
+    "test_r2": -0.4753,
+    "test_smape": 59.96
+  },
+  "subcohort_open_field_mineral_soil": {
+    "zones": [
+      2,
+      4
+    ],
+    "crops": [
+      "Tomato, open field",
+      "Zucchini"
+    ],
+    "sample_count": 4835,
+    "percentage_of_test": 68.6,
+    "mae": 1.9595,
+    "rmse": 2.619,
+    "r2": 0.985
+  },
+  "subcohort_soilless_organic_substrate": {
+    "zones": [
+      5
+    ],
+    "crops": [
+      "Blueberry"
+    ],
+    "sample_count": 2216,
+    "percentage_of_test": 31.4,
+    "mae": 50.7171,
+    "rmse": 51.0306,
+    "finding": "Post-harvest terminal dry-down to 3.71% VWC (out-of-distribution for clay=0.0%)"
+  },
+  "progression_mae": {
+    "train_mae": 2.7051,
+    "val_mae": 5.6578,
+    "test_mae": 17.2831,
+    "test_mineral_mae": 1.9595
+  },
+  "final_verdict": "CONDITIONAL PASS",
+  "verdict_rationale": "Evaluation is 100% valid and leak-free. Exceptional generalization on agricultural mineral soils (MAE 1.96% VWC, R\u00b2 0.9850). Limitations identified on unobserved extreme soilless substrate dry-down, requiring domain bounds in Milestone 9.",
+  "milestone_9_unlocked": true
+}

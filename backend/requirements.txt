@@ -3,3 +3,8 @@ uvicorn
 pydantic
 sqlalchemy
 python-dotenv
+httpx
+requests
+owslib
+rasterio
+pyproj

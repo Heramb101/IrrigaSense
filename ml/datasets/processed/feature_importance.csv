@@ -1,0 +1,15 @@
+feature,permutation_importance_mean,permutation_importance_std,native_importance
+soil_moisture,1.611301,0.014457,0.935922
+ec,0.164304,0.003241,0.015436
+ph,0.011103,0.000856,0.020194
+weather_wind_speed,0.001305,0.000271,0.001491
+weather_radiation,0.001223,8e-05,0.001333
+weather_pressure,0.000912,0.000131,0.002635
+water_vol_past_4h,0.000366,9.5e-05,0.004112
+hour,0.000334,0.000244,0.001093
+weather_humidity,0.000146,9.6e-05,0.000882
+soil_temperature_0-7cm,8.5e-05,0.000109,0.001009
+weather_temp,6.5e-05,0.000141,0.002609
+irrigation_duration_minutes,-9e-06,8e-06,8.4e-05
+weather_rain,-2.7e-05,1e-05,0.000104
+soil_temperature_7-18cm,-0.004008,0.002792,0.013096

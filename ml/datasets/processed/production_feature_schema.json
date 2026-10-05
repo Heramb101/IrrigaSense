@@ -1,0 +1,231 @@
+{
+  "model_specification": {
+    "model_name": "IrrigaSense ANFIS",
+    "version": "1.0-production",
+    "milestone": "7E",
+    "description": "Production data contract and feature schema for the IrrigaSense Adaptive Neuro-Fuzzy Inference System.",
+    "input_dimension_count": 5,
+    "anfis_rule_counts": {
+      "two_membership_functions_per_input": 32,
+      "three_membership_functions_per_input": 243
+    },
+    "farmer_interaction_contract": {
+      "question_count": 6,
+      "farmer_environmental_inputs_required": false,
+      "farmer_sensor_inputs_required": false,
+      "automation_level": "100% automated environmental and edaphic ingestion"
+    }
+  },
+  "final_production_features": [
+    {
+      "index": 1,
+      "canonical_name": "soil_moisture_root_zone",
+      "display_name": "Root-Zone Volumetric Soil Moisture",
+      "upstream_source": "Open-Meteo Forecast API",
+      "upstream_endpoint": "https://api.open-meteo.com/v1/forecast",
+      "upstream_parameter": "current.soil_moisture_7_to_28cm",
+      "data_type": "float",
+      "unit": "% VWC (Volumetric Water Content)",
+      "upstream_unit": "m³/m³",
+      "transformation": "round(raw_value * 100.0, 2)",
+      "valid_range": {
+        "min": 0.0,
+        "max": 65.0
+      },
+      "plausible_agricultural_bounds": {
+        "min": 5.0,
+        "max": 55.0
+      },
+      "missing_value_policy": "Raise upstream environmental exception; fallback to regional SoilGrids texture-based Field Capacity prior if transient timeout occurs.",
+      "acquisition_timing": "Contemporaneous at assessment / advisory request time",
+      "is_farmer_provided": false,
+      "is_automated": true,
+      "is_derived": true,
+      "agronomic_role": "Primary state variable representing current soil root-zone reservoir storage (7–28 cm layer)."
+    },
+    {
+      "index": 2,
+      "canonical_name": "et0_fao_evapotranspiration",
+      "display_name": "Daily Reference Evapotranspiration (ET₀ FAO-56)",
+      "upstream_source": "Open-Meteo Forecast API",
+      "upstream_endpoint": "https://api.open-meteo.com/v1/forecast",
+      "upstream_parameter": "daily.et0_fao_evapotranspiration[0]",
+      "data_type": "float",
+      "unit": "mm/day",
+      "upstream_unit": "mm",
+      "transformation": "round(raw_value, 2)",
+      "valid_range": {
+        "min": 0.0,
+        "max": 18.0
+      },
+      "plausible_agricultural_bounds": {
+        "min": 1.0,
+        "max": 12.0
+      },
+      "missing_value_policy": "Compute Hargreaves-Samani ET₀ fallback from temperature_2m_max and temperature_2m_min.",
+      "acquisition_timing": "Contemporaneous at assessment / advisory request time",
+      "is_farmer_provided": false,
+      "is_automated": true,
+      "is_derived": false,
+      "agronomic_role": "Primary atmospheric water demand flux synthesizing net solar radiation, temperature, wind, and vapor pressure deficit into unified reference depth."
+    },
+    {
+      "index": 3,
+      "canonical_name": "temperature_2m",
+      "display_name": "Current Ambient Air Temperature",
+      "upstream_source": "Open-Meteo Forecast API",
+      "upstream_endpoint": "https://api.open-meteo.com/v1/forecast",
+      "upstream_parameter": "current.temperature_2m",
+      "data_type": "float",
+      "unit": "°C",
+      "upstream_unit": "°C",
+      "transformation": "round(raw_value, 2)",
+      "valid_range": {
+        "min": -10.0,
+        "max": 55.0
+      },
+      "plausible_agricultural_bounds": {
+        "min": 5.0,
+        "max": 48.0
+      },
+      "missing_value_policy": "Raise upstream 502/504 exception; fallback to seasonal normal for coordinates.",
+      "acquisition_timing": "Contemporaneous at assessment / advisory request time",
+      "is_farmer_provided": false,
+      "is_automated": true,
+      "is_derived": false,
+      "agronomic_role": "Thermodynamic driver governing crop sensible heat flux, stomatal opening, and daytime metabolic activity."
+    },
+    {
+      "index": 4,
+      "canonical_name": "relative_humidity_2m",
+      "display_name": "Current Relative Humidity",
+      "upstream_source": "Open-Meteo Forecast API",
+      "upstream_endpoint": "https://api.open-meteo.com/v1/forecast",
+      "upstream_parameter": "current.relative_humidity_2m",
+      "data_type": "float",
+      "unit": "%",
+      "upstream_unit": "%",
+      "transformation": "round(raw_value, 2)",
+      "valid_range": {
+        "min": 0.0,
+        "max": 100.0
+      },
+      "plausible_agricultural_bounds": {
+        "min": 10.0,
+        "max": 100.0
+      },
+      "missing_value_policy": "Raise upstream 502/504 exception.",
+      "acquisition_timing": "Contemporaneous at assessment / advisory request time",
+      "is_farmer_provided": false,
+      "is_automated": true,
+      "is_derived": false,
+      "agronomic_role": "Vapor Pressure Deficit (VPD) atmospheric driver: controls leaf transpiration pull and canopy boundary layer drying."
+    },
+    {
+      "index": 5,
+      "canonical_name": "clay_content",
+      "display_name": "Soil Clay Fraction (0–5 cm Depth)",
+      "upstream_source": "ISRIC SoilGrids 1.0.0 WCS",
+      "upstream_endpoint": "https://maps.isric.org/mapserv?map=/map/clay.map",
+      "upstream_parameter": "clay_0-5cm_mean",
+      "data_type": "float",
+      "unit": "% (mass fraction)",
+      "upstream_unit": "g/kg",
+      "transformation": "round(raw_value * 0.1, 2)",
+      "valid_range": {
+        "min": 0.0,
+        "max": 100.0
+      },
+      "plausible_agricultural_bounds": {
+        "min": 2.0,
+        "max": 75.0
+      },
+      "missing_value_policy": "Fallback to state/district regional default soil texture class (e.g. 35.0% for Maharashtra Vertisols).",
+      "acquisition_timing": "Persisted in farm soil profile; retrieved on coordinate confirmation.",
+      "is_farmer_provided": false,
+      "is_automated": true,
+      "is_derived": true,
+      "agronomic_role": "Edaphic contextual anchor: governs soil water retention, pore size distribution, Field Capacity (FC), and Permanent Wilting Point (PWP)."
+    }
+  ],
+  "context_and_recommendation_variables": [
+    {
+      "name": "crop_id",
+      "source": "Farmer Workflow (Q2)",
+      "role": "Agronomic Lookup: Determines crop coefficient (Kc) curve, maximum root depth (Zr), and water stress threshold (MAD)."
+    },
+    {
+      "name": "planting_date",
+      "source": "Farmer Workflow (Q3)",
+      "role": "Phenology Calculator: Computes Days After Planting (DAP) and current crop growth stage (Initial, Dev, Mid, Late)."
+    },
+    {
+      "name": "farm_size_acres",
+      "source": "Farmer Workflow (Q4)",
+      "role": "Volumetric Scaling: Translates ANFIS net water depth recommendation (mm) into gross field volume (liters or m³)."
+    },
+    {
+      "name": "irrigation_method",
+      "source": "Farmer Workflow (Q5)",
+      "role": "Efficiency Correction: Scales gross water requirement based on application efficiency (drip 90%, sprinkler 75%, furrow 60%)."
+    },
+    {
+      "name": "water_availability",
+      "source": "Farmer Workflow (Q6)",
+      "role": "Operational Scheduler: Restricts irrigation duration and pumping schedules to available power/canal supply windows."
+    },
+    {
+      "name": "latitude",
+      "source": "Google Maps (Q1)",
+      "role": "Spatial Anchor: Coordinates for Open-Meteo weather and ISRIC SoilGrids extraction."
+    },
+    {
+      "name": "longitude",
+      "source": "Google Maps (Q1)",
+      "role": "Spatial Anchor: Coordinates for Open-Meteo weather and ISRIC SoilGrids extraction."
+    },
+    {
+      "name": "precipitation_forecast",
+      "source": "Open-Meteo Forecast API",
+      "role": "Advisory Rule Filter: Suppresses or postpones irrigation advisories if incoming precipitation >= 10 mm."
+    }
+  ],
+  "excluded_features_and_rationale": [
+    {
+      "feature": "electrical_conductivity (ec)",
+      "exclusion_reason": "Not provided by SoilGrids WCS; requires hardware probe; cannot be asked to farmer."
+    },
+    {
+      "feature": "water_vol_past_4h",
+      "exclusion_reason": "Telemetry flowmeter missing; cannot be asked to farmer; assumed 0 at pre-irrigation advisory."
+    },
+    {
+      "feature": "soil_temperature_0-7cm",
+      "exclusion_reason": "95.85% collinear with air temperature (Milestone 7B); requires in-ground sensor."
+    },
+    {
+      "feature": "soil_temperature_7-18cm",
+      "exclusion_reason": "Negative permutation importance (-0.0040); chronological overfitting drag."
+    },
+    {
+      "feature": "irrigation_duration_minutes",
+      "exclusion_reason": "Target-time deployment paradox; advisory is issued before valve opens."
+    },
+    {
+      "feature": "surface_pressure",
+      "exclusion_reason": "Negligible feature importance (+0.000912); causes rule explosion without predictive gain."
+    },
+    {
+      "feature": "shortwave_radiation",
+      "exclusion_reason": "Modest incremental gain (+0.0059 R² in 7D); net radiative energy is already subsumed within FAO-56 ET₀."
+    },
+    {
+      "feature": "silt_percent",
+      "exclusion_reason": "Mathematically redundant with sand and clay fractions (sum to 100%)."
+    },
+    {
+      "feature": "hour",
+      "exclusion_reason": "Negligible permutation importance (+0.000334); adds 3x rule explosion."
+    }
+  ]
+}

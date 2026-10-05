@@ -1,0 +1,120 @@
+{
+  "dataset_name": "IrrigaSense ANFIS Training Dataset",
+  "split_strategy": "chronological_time_series",
+  "split_ratios": {
+    "train": 0.7,
+    "validation": 0.15,
+    "test": 0.15
+  },
+  "total_rows": 47007,
+  "partitions": {
+    "train": {
+      "name": "Training Set",
+      "row_count": 32905,
+      "percentage": 70.0,
+      "start_timestamp": "2025-02-14 23:50:00",
+      "end_timestamp": "2025-08-24 08:20:00",
+      "zone_distribution": {
+        "1": 7884,
+        "2": 7688,
+        "3": 1090,
+        "4": 8352,
+        "5": 7891
+      },
+      "crop_distribution": {
+        "Tomato, open field": 15572,
+        "Zucchini": 8352,
+        "Blueberry": 7891,
+        "Tomato, pots": 1090
+      }
+    },
+    "validation": {
+      "name": "Validation Set",
+      "row_count": 7051,
+      "percentage": 15.0,
+      "start_timestamp": "2025-08-24 08:20:00",
+      "end_timestamp": "2025-09-06 13:30:00",
+      "zone_distribution": {
+        "1": 1647,
+        "2": 1831,
+        "4": 1899,
+        "5": 1674
+      },
+      "crop_distribution": {
+        "Tomato, open field": 3478,
+        "Zucchini": 1899,
+        "Blueberry": 1674
+      }
+    },
+    "test": {
+      "name": "Test Set",
+      "row_count": 7051,
+      "percentage": 15.0,
+      "start_timestamp": "2025-09-06 13:30:00",
+      "end_timestamp": "2025-09-23 14:40:00",
+      "zone_distribution": {
+        "2": 2410,
+        "4": 2425,
+        "5": 2216
+      },
+      "crop_distribution": {
+        "Zucchini": 2425,
+        "Tomato, open field": 2410,
+        "Blueberry": 2216
+      }
+    }
+  },
+  "per_zone_distribution": {
+    "zone_1": {
+      "crop": "Tomato, open field",
+      "total_rows": 9531,
+      "train_rows": 7884,
+      "val_rows": 1647,
+      "test_rows": 0,
+      "start_timestamp": "2025-02-28 15:00:00",
+      "end_timestamp": "2025-09-04 18:50:00"
+    },
+    "zone_2": {
+      "crop": "Tomato, open field",
+      "total_rows": 11929,
+      "train_rows": 7688,
+      "val_rows": 1831,
+      "test_rows": 2410,
+      "start_timestamp": "2025-02-28 14:20:00",
+      "end_timestamp": "2025-09-23 10:10:00"
+    },
+    "zone_3": {
+      "crop": "Tomato, pots",
+      "total_rows": 1090,
+      "train_rows": 1090,
+      "val_rows": 0,
+      "test_rows": 0,
+      "start_timestamp": "2025-02-14 23:50:00",
+      "end_timestamp": "2025-06-25 08:10:00"
+    },
+    "zone_4": {
+      "crop": "Zucchini",
+      "total_rows": 12676,
+      "train_rows": 8352,
+      "val_rows": 1899,
+      "test_rows": 2425,
+      "start_timestamp": "2025-03-01 07:10:00",
+      "end_timestamp": "2025-09-23 14:40:00"
+    },
+    "zone_5": {
+      "crop": "Blueberry",
+      "total_rows": 11781,
+      "train_rows": 7891,
+      "val_rows": 1674,
+      "test_rows": 2216,
+      "start_timestamp": "2025-02-28 13:40:00",
+      "end_timestamp": "2025-09-22 20:00:00"
+    }
+  },
+  "notes": [
+    "Data was sorted strictly chronologically by timestamp (ts) prior to partitioning.",
+    "Zone 3 (pots) data collection concluded on 2025-06-25, so its samples reside entirely within the training partition.",
+    "Zone 1 data collection concluded on 2025-09-04, so its samples reside across training and validation partitions.",
+    "Zones 2, 4, and 5 span the full season into late September 2025 and are represented across training, validation, and test partitions."
+  ]
+}

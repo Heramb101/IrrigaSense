@@ -350,157 +350,246 @@ export const GoogleMapLocationPicker: React.FC<GoogleMapLocationPickerProps> = (
     <div className="google-maps-location-picker">
       {/* 1. REAL GOOGLE MAPS INTERFACE */}
       {hasApiKey && mapStatus !== 'error' && (
-        <div className="google-maps-active-wrapper">
-          {/* Search bar row */}
-          <div className="map-search-bar-row">
-            <div className="map-search-input-wrap">
-              <span className="search-icon">🔍</span>
-              <input
-                ref={searchInputRef}
-                type="text"
-                className="map-search-input"
-                placeholder="Search village, town, or area (e.g. Baramati, Maharashtra)..."
-              />
-            </div>
-            <button
-              type="button"
-              className="gps-locate-btn"
-              onClick={handleUseCurrentLocation}
-              title="Use my current location"
-            >
-              📍 Use My Current Location
-            </button>
-          </div>
-
-          {searchAreaHint && (
-            <div className="search-area-hint-banner">
-              <span>{searchAreaHint}</span>
+        <div className="google-maps-two-column-layout">
+          {/* Left Column: Search, status & Confirmation */}
+          <div className="map-left-controls-col">
+            {/* Search bar row */}
+            <div className="map-search-bar-row">
+              <div className="map-search-input-wrap">
+                <span className="search-icon">🔍</span>
+                <input
+                  ref={searchInputRef}
+                  type="text"
+                  className="map-search-input"
+                  placeholder="Search village, town, or district..."
+                />
+              </div>
               <button
                 type="button"
-                className="close-hint-btn"
-                onClick={() => setSearchAreaHint('')}
+                className="gps-locate-btn"
+                onClick={handleUseCurrentLocation}
+                title="Use my current device location"
               >
-                ✕
+                📍 GPS
               </button>
             </div>
-          )}
 
-          {/* Interactive Map Canvas */}
-          <div className="google-maps-canvas-container">
-            {mapStatus === 'loading' && (
-              <div className="map-loading-overlay">
-                <div className="loading-spinner" />
-                <p>Loading interactive Google Satellite Map...</p>
+            {searchAreaHint && (
+              <div className="search-area-hint-banner">
+                <span>{searchAreaHint}</span>
+                <button
+                  type="button"
+                  className="close-hint-btn"
+                  onClick={() => setSearchAreaHint('')}
+                >
+                  ✕
+                </button>
               </div>
             )}
-            <div ref={mapContainerRef} className="google-maps-div" />
+
+            {/* Location Confirmation Card */}
+            <div className="location-confirmation-card">
+              <div className="loc-instruction-row">
+                <span className="loc-instruction-text">
+                  {hasCoordinates ? '📍 Drag pin or tap map to adjust' : '👆 Tap your farm on the map'}
+                </span>
+              </div>
+
+              <div className="loc-details-row">
+                <div className="loc-meta">
+                  <span className="loc-label">Selected Farm Plot:</span>
+                  <strong className="loc-name">
+                    {draftPlaceName || (hasCoordinates ? `${draftLat.toFixed(4)}° N, ${draftLng.toFixed(4)}° E` : 'No location selected')}
+                  </strong>
+                  {hasCoordinates && (
+                    <span className="loc-coords">
+                      {draftLat.toFixed(5)}° N, {draftLng.toFixed(5)}° E
+                    </span>
+                  )}
+                </div>
+
+                <div className="loc-action">
+                  {isConfirmed ? (
+                    <div className="confirmed-badge">
+                      <span>✓ Location Confirmed</span>
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      className="btn btn-primary confirm-loc-btn"
+                      disabled={!hasCoordinates}
+                      onClick={handleConfirmLocation}
+                    >
+                      Confirm Location
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Google Maps Interactive Canvas */}
+          <div className="map-right-viewport-col">
+            <div className="google-maps-canvas-container">
+              {mapStatus === 'loading' && (
+                <div className="map-loading-overlay">
+                  <div className="loading-spinner" />
+                  <p>Loading Google Satellite Map...</p>
+                </div>
+              )}
+              <div ref={mapContainerRef} className="google-maps-div" />
+            </div>
           </div>
         </div>
       )}
 
       {/* 2. CONFIGURATION / ERROR / DEVELOPMENT FALLBACK STATE */}
       {(!hasApiKey || mapStatus === 'error') && (
-        <div className="maps-integration-boundary">
-          <div className="maps-key-notice-card">
-            <div className="notice-header">
-              <span className="notice-icon">⚠️</span>
-              <h4>Map is unavailable. Please check the Google Maps configuration.</h4>
+        <div className="google-maps-two-column-layout fallback-mode-layout">
+          {/* Left Column: Fallback Coordinates Entry Form & Confirmation */}
+          <div className="map-left-controls-col">
+            <div className="dev-fallback-container">
+              <div className="fallback-header">
+                <span className="fallback-badge">Development Coordinates Setup</span>
+                <span className="fallback-disclaimer">
+                  (Non-API fallback for offline development & testing)
+                </span>
+              </div>
+
+              <div className="fallback-form-grid">
+                <div className="fallback-input-group">
+                  <label htmlFor="fallback-lat">Latitude (°N):</label>
+                  <input
+                    id="fallback-lat"
+                    type="number"
+                    step="0.0001"
+                    className="fallback-input"
+                    placeholder="e.g. 18.1519"
+                    value={draftLat || ''}
+                    onChange={(e) => {
+                      const lat = parseFloat(e.target.value) || 0;
+                      setDraftLat(lat);
+                      setIsConfirmed(false);
+                      onLocationChange({
+                        latitude: lat,
+                        longitude: draftLng,
+                        place_name: draftPlaceName,
+                        location_confirmed: false,
+                      });
+                    }}
+                  />
+                </div>
+
+                <div className="fallback-input-group">
+                  <label htmlFor="fallback-lng">Longitude (°E):</label>
+                  <input
+                    id="fallback-lng"
+                    type="number"
+                    step="0.0001"
+                    className="fallback-input"
+                    placeholder="e.g. 74.5770"
+                    value={draftLng || ''}
+                    onChange={(e) => {
+                      const lng = parseFloat(e.target.value) || 0;
+                      setDraftLng(lng);
+                      setIsConfirmed(false);
+                      onLocationChange({
+                        latitude: draftLat,
+                        longitude: lng,
+                        place_name: draftPlaceName,
+                        location_confirmed: false,
+                      });
+                    }}
+                  />
+                </div>
+
+                <div className="fallback-input-group full-width">
+                  <label htmlFor="fallback-place">Place / Village Name:</label>
+                  <input
+                    id="fallback-place"
+                    type="text"
+                    className="fallback-input"
+                    placeholder="e.g. Baramati, Pune District, Maharashtra"
+                    value={draftPlaceName}
+                    onChange={(e) => {
+                      const name = e.target.value;
+                      setDraftPlaceName(name);
+                      setIsConfirmed(false);
+                      onLocationChange({
+                        latitude: draftLat,
+                        longitude: draftLng,
+                        place_name: name,
+                        location_confirmed: false,
+                      });
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="fallback-actions-row">
+                <button
+                  type="button"
+                  className="gps-locate-btn"
+                  onClick={handleUseCurrentLocation}
+                >
+                  📍 Use Device GPS Location
+                </button>
+              </div>
             </div>
-            <p className="notice-desc">
-              To enable the interactive Google Satellite Map, configure{' '}
-              <code>VITE_GOOGLE_MAPS_API_KEY</code> in your <code>.env.local</code> file.
-              The key requires Google Maps JavaScript API and Places API enabled in Google Cloud Console.
-            </p>
-            {mapErrorMessage && <p className="notice-error">{mapErrorMessage}</p>}
+
+            {/* Location Confirmation Card */}
+            <div className="location-confirmation-card">
+              <div className="loc-instruction-row">
+                <span className="loc-instruction-text">
+                  {hasCoordinates ? '📍 Confirm coordinates for environmental telemetry' : '👆 Enter coordinates or select a preset'}
+                </span>
+              </div>
+
+              <div className="loc-details-row">
+                <div className="loc-meta">
+                  <span className="loc-label">Selected Farmland:</span>
+                  <strong className="loc-name">
+                    {draftPlaceName || (hasCoordinates ? `${draftLat.toFixed(4)}° N, ${draftLng.toFixed(4)}° E` : 'No location specified')}
+                  </strong>
+                  {hasCoordinates && (
+                    <span className="loc-coords">
+                      {draftLat.toFixed(5)}° N, {draftLng.toFixed(5)}° E
+                    </span>
+                  )}
+                </div>
+
+                <div className="loc-action">
+                  {isConfirmed ? (
+                    <div className="confirmed-badge">
+                      <span>✓ Location Confirmed</span>
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      className="btn btn-primary confirm-loc-btn"
+                      disabled={!hasCoordinates}
+                      onClick={handleConfirmLocation}
+                    >
+                      Confirm Location
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Development Fallback Entry Form */}
-          <div className="dev-fallback-container">
-            <div className="fallback-header">
-              <span className="fallback-badge">Development Fallback Location Setup</span>
-              <span className="fallback-disclaimer">
-                (Non-API fallback for offline development & testing. Does not simulate final Google Map)
-              </span>
-            </div>
-
-            <div className="fallback-form-grid">
-              <div className="fallback-input-group">
-                <label htmlFor="fallback-lat">Latitude (°N):</label>
-                <input
-                  id="fallback-lat"
-                  type="number"
-                  step="0.0001"
-                  className="fallback-input"
-                  placeholder="e.g. 18.1519"
-                  value={draftLat || ''}
-                  onChange={(e) => {
-                    const lat = parseFloat(e.target.value) || 0;
-                    setDraftLat(lat);
-                    setIsConfirmed(false);
-                    onLocationChange({
-                      latitude: lat,
-                      longitude: draftLng,
-                      place_name: draftPlaceName,
-                      location_confirmed: false,
-                    });
-                  }}
-                />
+          {/* Right Column: Key notice & Quick Presets */}
+          <div className="map-right-viewport-col">
+            <div className="maps-key-notice-card">
+              <div className="notice-header">
+                <span className="notice-icon">ℹ️</span>
+                <h4>Map is unavailable. Please check the Google Maps configuration.</h4>
               </div>
-
-              <div className="fallback-input-group">
-                <label htmlFor="fallback-lng">Longitude (°E):</label>
-                <input
-                  id="fallback-lng"
-                  type="number"
-                  step="0.0001"
-                  className="fallback-input"
-                  placeholder="e.g. 74.5770"
-                  value={draftLng || ''}
-                  onChange={(e) => {
-                    const lng = parseFloat(e.target.value) || 0;
-                    setDraftLng(lng);
-                    setIsConfirmed(false);
-                    onLocationChange({
-                      latitude: draftLat,
-                      longitude: lng,
-                      place_name: draftPlaceName,
-                      location_confirmed: false,
-                    });
-                  }}
-                />
-              </div>
-
-              <div className="fallback-input-group full-width">
-                <label htmlFor="fallback-place">Place / Village Name:</label>
-                <input
-                  id="fallback-place"
-                  type="text"
-                  className="fallback-input"
-                  placeholder="e.g. Baramati, Pune District, Maharashtra"
-                  value={draftPlaceName}
-                  onChange={(e) => {
-                    const name = e.target.value;
-                    setDraftPlaceName(name);
-                    setIsConfirmed(false);
-                    onLocationChange({
-                      latitude: draftLat,
-                      longitude: draftLng,
-                      place_name: name,
-                      location_confirmed: false,
-                    });
-                  }}
-                />
-              </div>
-            </div>
-
-            <div className="fallback-actions-row">
-              <button
-                type="button"
-                className="gps-locate-btn"
-                onClick={handleUseCurrentLocation}
-              >
-                📍 Use Device GPS Location
-              </button>
+              <p className="notice-desc">
+                To enable the interactive Google Satellite Map, configure{' '}
+                <code>VITE_GOOGLE_MAPS_API_KEY</code> in your <code>.env</code> file.
+              </p>
+              {mapErrorMessage && <p className="notice-error">{mapErrorMessage}</p>}
             </div>
 
             <div className="fallback-presets-block">
@@ -522,46 +611,6 @@ export const GoogleMapLocationPicker: React.FC<GoogleMapLocationPickerProps> = (
           </div>
         </div>
       )}
-
-      {/* 3. LOCATION CONFIRMATION AREA (Matches Section 2 UI specification) */}
-      <div className="location-confirmation-card">
-        <div className="loc-instruction-row">
-          <span className="loc-instruction-text">
-            {hasCoordinates ? '📍 Move the pin to your farm' : '👆 Tap your farm on the map to place a pin'}
-          </span>
-        </div>
-
-        <div className="loc-details-row">
-          <div className="loc-meta">
-            <span className="loc-label">Location:</span>
-            <strong className="loc-name">
-              {draftPlaceName || (hasCoordinates ? `${draftLat.toFixed(4)}° N, ${draftLng.toFixed(4)}° E` : 'No location selected yet')}
-            </strong>
-            {hasCoordinates && (
-              <span className="loc-coords">
-                {draftLat.toFixed(5)}° N, {draftLng.toFixed(5)}° E
-              </span>
-            )}
-          </div>
-
-          <div className="loc-action">
-            {isConfirmed ? (
-              <div className="confirmed-badge">
-                <span>✓ Location Confirmed</span>
-              </div>
-            ) : (
-              <button
-                type="button"
-                className="btn btn-primary confirm-loc-btn"
-                disabled={!hasCoordinates}
-                onClick={handleConfirmLocation}
-              >
-                Confirm Location
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

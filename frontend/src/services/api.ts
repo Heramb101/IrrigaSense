@@ -10,7 +10,11 @@ import type { AssessmentCreate, AssessmentRead, AssessmentUpdate } from '../type
  * NOTE: Architecture stub only. Live API integration will be wired in subsequent milestones.
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+const API_BASE_URL =
+  (typeof import.meta !== 'undefined' && (import.meta as any).env?.VITE_API_URL) ||
+  'http://localhost:8000/api';
+
+export { authApi } from './authApi';
 
 export const assessmentApi = {
   /**
@@ -22,6 +26,7 @@ export const assessmentApi = {
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
       body: JSON.stringify(payload),
     });
 
@@ -64,6 +69,27 @@ export const assessmentApi = {
 
     if (!response.ok) {
       throw new Error(`Failed to update assessment ${id}: ${response.statusText}`);
+    }
+
+    return response.json();
+  },
+
+  /**
+   * Fetch all assessments belonging to the authenticated user (ordered newest first)
+   */
+  async getMyAssessments(): Promise<AssessmentRead[]> {
+    const response = await fetch(`${API_BASE_URL}/assessments/mine`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+      },
+      credentials: 'include',
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => null);
+      const detail = errorData?.detail || response.statusText || 'Failed to fetch assessment history';
+      throw new Error(detail);
     }
 
     return response.json();

@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from app.database.connection import Base
-from app.models.models import User, Farm, Assessment
+from app.models.models import User, Farm, Assessment, UserSession
 from app.schemas.assessment import (
     AssessmentData, AssessmentCreate, SoilData, SoilGridsData, 
     FarmerSoilReport, LocationData, FarmDetails, LandHistory, 

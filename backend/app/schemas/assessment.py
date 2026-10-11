@@ -1,6 +1,6 @@
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Optional, List, Dict, Any
-from datetime import date
+from datetime import date, datetime
 
 class LocationData(BaseModel):
     latitude: float
@@ -99,7 +99,10 @@ class AssessmentUpdate(BaseModel):
 class AssessmentRead(BaseModel):
     id: int
     farm_id: int
+    user_id: Optional[int] = None
     assessment_version: str
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
     data: AssessmentData
-    
+
     model_config = ConfigDict(from_attributes=True)

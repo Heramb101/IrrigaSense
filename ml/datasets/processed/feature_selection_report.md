@@ -1,9 +1,9 @@
 # IrrigaSense — Feature Analysis and ANFIS Input Selection Report
 
-> **Milestone 7B Technical Specification**  
-> **Generated Date / Time:** 2026-10-06 03:42:59  
-> **Master Dataset:** `ml/datasets/processed/irrigation_anfis_dataset.csv` (47,007 rows, certified unmodified)  
-> **Methodology:** Leakage-safe chronological validation (Train 70% / Val 15% / Test 15% untouched)  
+> **Milestone 7B Technical Specification**
+> **Generated Date / Time:** 2026-10-11 21:32:09
+> **Master Dataset:** `ml/datasets/processed/irrigation_anfis_dataset.csv` (47,007 rows, certified unmodified)
+> **Methodology:** Leakage-safe chronological validation (Train 70% / Val 15% / Test 15% untouched)
 > **Recommended ANFIS Input Architecture:** **Set B (8 features)** with **Set C (5 features)** as compact alternative
 
 ---
@@ -58,7 +58,8 @@ A total of 14 continuous numerical features present in the master dataset were e
 
 Correlations evaluated against `target_mean_24h` on the training set (32,905 rows):
 
-| Rank | Feature | Pearson Correlation ($r$) | Spearman Correlation ($ho$) | Absolute Spearman ($|\rho|$) | Physical Role |
+| Rank | Feature | Pearson Correlation ($r$) | Spearman Correlation ($
+ho$) | Absolute Spearman ($|\rho|$) | Physical Role |
 |:----:|:--------|:--------------------------|:------------------------------|:-----------------------------|:--------------|
 | 1 | `soil_moisture` | +0.9640 | +0.9512 | 0.9512 | Strong baseline state |
 | 2 | `ec` | +0.5916 | +0.5175 | 0.5175 | Salinity/Soil proxy |
@@ -169,7 +170,7 @@ To test whether pruning features causes predictive degradation, three distinct f
 | **Set B (Reduced — 8 Features)** | 8 | `soil_moisture`, `ec`, `water_vol_past_4h`, `weather_temp`, `weather_radiation`, `weather_wind_speed`, `weather_humidity`, `weather_pressure` | **3.4545%** | **7.9426%** | **0.9057** |
 | **Set C (Compact — 5 Features)** | 5 | `soil_moisture`, `ec`, `water_vol_past_4h`, `weather_temp`, `weather_radiation` | **3.3614%** | **7.8554%** | **0.9078** |
 
-> **Crucial Empirical Finding:**  
+> **Crucial Empirical Finding:**
 > **Set B (8 features)** and **Set C (5 features)** both **outperform Set A (13 features)** on chronological validation! Set C achieves an $R^2$ of **0.9078** and MAE of **3.3614%** (compared to Set A's $R^2 = 0.8904$ and MAE of $3.8244%$). Pruning redundant, collinear, and noisy features actively improves out-of-sample temporal generalization by preventing tree over-parameterization.
 
 ---

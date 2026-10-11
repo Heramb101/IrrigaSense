@@ -12,7 +12,9 @@ import {
 import {
   type AssessmentState,
   INITIAL_ASSESSMENT_STATE,
+  INITIAL_ASSESSMENT_DATA,
 } from '../assessment/assessmentState';
+import type { AssessmentRead } from '../types/assessment';
 import {
   AssessmentContext,
   type AssessmentContextValue,
@@ -293,6 +295,66 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     setState(INITIAL_ASSESSMENT_STATE);
   }, []);
 
+  const loadDraftFromAssessment = useCallback((assessment: AssessmentRead) => {
+    const rawData = assessment.data || {};
+    const loc = rawData.location || {};
+    const lat = loc.latitude ?? rawData.latitude ?? 0;
+    const lng = loc.longitude ?? rawData.longitude ?? 0;
+    const placeName = loc.place_name || loc.location_name || rawData.place_name || '';
+    const cropVal = typeof rawData.crop === 'string' ? rawData.crop : rawData.crop?.current_crop_id || '';
+    const plantingDate = rawData.planting_date || rawData.crop?.planting_date || '';
+    const farmSize = rawData.farm?.size_range || rawData.farm_size || '';
+    const irrigationMethod = rawData.irrigation?.method || rawData.irrigation_method || '';
+    const waterAvailability = rawData.irrigation?.water_reliability || rawData.water_availability || '';
+
+    const nextData: AssessmentData = {
+      ...INITIAL_ASSESSMENT_DATA,
+      latitude: lat,
+      longitude: lng,
+      place_name: placeName,
+      location: {
+        latitude: lat,
+        longitude: lng,
+        place_name: placeName,
+        location_confirmed: Boolean(lat && lng),
+      },
+      crop: cropVal,
+      planting_date: plantingDate,
+      farm_size: farmSize,
+      irrigation_method: irrigationMethod,
+      water_availability: waterAvailability,
+      farm: {
+        size_range: farmSize,
+        experience_years_range: rawData.farm?.experience_years_range || '3-5 years',
+      },
+      land_history: {
+        previous_crops: rawData.land_history?.previous_crops || [],
+        historical_problems: rawData.land_history?.historical_problems || [],
+      },
+      soil: rawData.soil || INITIAL_ASSESSMENT_DATA.soil,
+      weather: rawData.weather || INITIAL_ASSESSMENT_DATA.weather,
+      irrigation: {
+        method: irrigationMethod,
+        water_source: rawData.irrigation?.water_source || 'borewell',
+        water_reliability: waterAvailability,
+        current_frequency: rawData.irrigation?.current_frequency || 'daily',
+      },
+      farm_inputs: rawData.farm_inputs || INITIAL_ASSESSMENT_DATA.farm_inputs,
+      goals: rawData.goals || INITIAL_ASSESSMENT_DATA.goals,
+    };
+
+    setValidationError(null);
+    setFinalSubmission(null);
+    setState({
+      currentQuestionId: 'REVIEW',
+      history: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6'],
+      data: nextData,
+      isCompleted: false,
+      isSubmitting: false,
+      hasReachedReview: true,
+    });
+  }, []);
+
   const returnToReview = useCallback(() => {
     setValidationError(null);
     setState((prev) => ({
@@ -321,6 +383,7 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       returnToReview,
       submitAssessment,
       resetAssessment,
+      loadDraftFromAssessment,
     }),
     [
       state,
@@ -340,6 +403,7 @@ export const AssessmentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       returnToReview,
       submitAssessment,
       resetAssessment,
+      loadDraftFromAssessment,
     ]
   );
 

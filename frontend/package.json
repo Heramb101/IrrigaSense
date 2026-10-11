@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "test": "npx tsx src/tests/flow.test.ts && npx tsx src/tests/dashboard.test.ts",
+    "test": "npx tsx src/tests/flow.test.ts && npx tsx src/tests/dashboard.test.ts && npx tsx src/tests/auth.test.ts && npx tsx src/tests/history.test.ts",
 
     "preview": "vite preview"
   },

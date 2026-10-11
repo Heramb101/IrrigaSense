@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import type { AssessmentCreate, AssessmentData } from '../types/assessment';
+import type { AssessmentCreate, AssessmentData, AssessmentRead } from '../types/assessment';
 import type { QuestionId, QuestionDefinition, SectionMetadata } from '../assessment/assessmentConfig';
 import type { AssessmentState } from '../assessment/assessmentState';
 
@@ -33,6 +33,7 @@ export interface AssessmentContextValue {
   returnToReview: () => void;
   submitAssessment: () => boolean;
   resetAssessment: () => void;
+  loadDraftFromAssessment?: (assessment: AssessmentRead) => void;
 }
 
 export const AssessmentContext = createContext<AssessmentContextValue | null>(null);

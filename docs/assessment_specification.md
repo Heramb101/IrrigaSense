@@ -1,444 +1,218 @@
-# IrrigaSense Formal 20-Question Assessment Specification
+# IrrigaSense — Formal 6-Question Assessment Specification
 
-## 1. Assessment Philosophy & UX Principles
-
-The IrrigaSense assessment is designed as a simple, personalized farm checkup rather than a technical agricultural form. 
-
-**Core Principle:** Ask the farmer only for information that cannot reliably be obtained automatically. 
-
-**UX Principles:**
-- Feel conversational and use simple language.
-- Prefer visual choices (maps, selectors, simple buttons) where possible.
-- Avoid technical terminology (e.g., ET₀, soil bulk density).
-- Avoid unnecessary typing (use predefined ranges instead of precise numbers).
-- Automatically obtain environmental information (weather, soil) and ask the farmer to confirm or correct it.
-- Clearly explain why a technical value is being requested if absolutely necessary.
-- Ensure the interface works well on mobile devices.
-- Avoid overwhelming the farmer by paginating questions or revealing them step-by-step.
-
-## 2. Data Provenance
-
-To maintain data integrity and allow for ongoing refinement, the system will explicitly track the source of all information. Source data will never be overwritten by manual corrections; instead, both will be stored.
-
-Data categories include:
-- **Farmer-provided data** (e.g., `soil_test_ph`, `farm_size_range`)
-- **API-derived data** (e.g., `soilgrids_ph`, `open_meteo_et0`)
-- **API-confirmed by farmer** (e.g., `weather_farmer_confirmed`)
-
-## 3. Conditional Logic Mapping
-
-The assessment relies on dynamic branching to skip unnecessary questions or surface relevant ones.
-
-- **Q1** → Retrieve location.
-- **Q1** → Attempt Open-Meteo and SoilGrids retrieval.
-- **Q2** → If location is incorrect, return to Q1.
-- **Q3** → If weather is incorrect, show simple farmer-friendly manual weather correction.
-- **Q8** → If SoilGrids data is available, show SoilGrids information.
-- **Q8** → If farmer has a soil report, show Q9.
-- **Q8** → If no soil report, skip Q9.
-- **Q8** → If SoilGrids is unavailable, use the qualitative soil fallback and continue the assessment.
-- **Q10** → Remains available regardless of SoilGrids availability.
-- **Q12 + Crop Calendar** → Estimate crop stage.
-- **Q13** → Farmer confirms or corrects estimated crop stage.
-- **Q15** → If irrigation method is Rain-fed, Q16/Q17/Q18 irrigation-specific questions should be handled appropriately.
-- **Q18** → Capture both irrigation frequency and optional last irrigation timing.
+> **Document ID:** `SPEC-ASSESSMENT-V2-20261010`
+> **Topic:** Onboarding Questionnaire & Environmental Data Resolution Specification
+> **Status:** **ACTIVE / PRODUCTION SPECIFICATION**
+> **Supersedes:** Legacy 20-Question Specification (V1)
 
 ---
 
-## 4. Question Specifications
+## 1. Assessment Philosophy & Core Principles
 
-**Question Summary List:**
-- Q1 Farm location
-- Q2 Location confirmation
-- Q3 Weather confirmation
-- Q4 Farm size
-- Q5 Farming experience
-- Q6 Previous crops / land history
-- Q7 Historical land problems
-- Q8 Soil information confirmation / fallback
-- Q9 Soil report (conditional)
-- Q10 Soil water behaviour
-- Q11 Current crop
-- Q12 Planting date
-- Q13 Crop stage confirmation
-- Q14 Crop condition
-- Q15 Irrigation method
-- Q16 Water source
-- Q17 Water availability
-- Q18 Irrigation frequency + last irrigation
-- Q19 Farm inputs
-- Q20 Farmer goals
+The IrrigaSense onboarding experience is engineered around a single foundational agronomic principle:
+> **Ask the farmer only for information that cannot reliably and accurately be resolved via automated telemetry.**
 
-*(Note: Actual irrigation efficiency factors, crop coefficients, water requirements, critical growth stages, and recommendation rules will be defined separately using authoritative agricultural sources. They are not hardcoded into the assessment specification.)*
+### UX & Agronomic Design Principles:
+1. **Zero Technical Hardware Prerequisite:** Eliminates any requirement for farmers to purchase, install, calibrate, or wire in-situ capacitive/TDR soil moisture probes.
+2. **Zero Manual Mathematical Burden:** Never asks farmers to provide numerical soil physical properties (e.g. bulk density, clay percentage, field capacity) or atmospheric indices (e.g. $ET_0$, vapor pressure deficit).
+3. **Frictionless 6-Question Traversal:** Restricts user input strictly to 6 intuitive, high-signal questions formatted as visual cards, date pickers, and interactive maps.
+4. **Transparent Data Provenance:** Clearly separates user-provided operational context from upstream automated satellite/meteorological telemetry.
+5. **Clear Visual Separation:** Google Maps satellite imagery provides visual geographic plot confirmation; it is explicitly noted that optical satellite imagery does not directly measure root-zone moisture or NDVI.
 
-### Q1 — Farm Location
-- **Question ID**: Q1
-- **Question text**: "Where is your farm?"
-- **Section**: Location
-- **Input type**: Interactive map picker
-- **Options**: N/A (lat/lon selection)
-- **Required**: YES
-- **Conditional parent**: None
-- **Condition**: N/A
-- **Database field**: `latitude`, `longitude`, `location_name` (farmer-provided)
-- **External API dependency**: Google Maps
-- **ML/recommendation relevance**: Critical. Drives all environmental lookups.
-- **Notes**: Farmer selects the farm location. Once selected, triggers parallel fetching of Open-Meteo and SoilGrids data.
+---
 
-### Q2 — Location Confirmation
-- **Question ID**: Q2
-- **Question text**: "Is this your farm's location?"
-- **Section**: Location
-- **Input type**: Radio / Buttons
-- **Options**: Yes / No, change location
-- **Required**: YES
-- **Conditional parent**: Q1
-- **Condition**: Q1 completed
-- **Database field**: `location_confirmed`
-- **External API dependency**: Google Maps (Geocoding/Place Name)
-- **ML/recommendation relevance**: Ensures accurate coordinates.
-- **Notes**: Farmer confirms that the selected location is actually their farm. Shows a map preview and place name. "No" returns user to Q1.
+## 2. Onboarding Workflow & Question Architecture
 
-### Q3 — Weather Confirmation
-- **Question ID**: Q3
-- **Question text**: "Does this look like the weather at your farm right now?" (shows Temp, Humidity, Precipitation)
-- **Section**: Environment
-- **Input type**: Radio / Buttons + Optional manual inputs
-- **Options**: Yes / No
-- **Required**: YES
-- **Conditional parent**: Q2
-- **Condition**: Q2 confirmed = Yes
-- **Database field**: `weather_farmer_confirmed`, `farmer_reported_weather`
-- **External API dependency**: Open-Meteo
-- **ML/recommendation relevance**: Establishes current ET₀ baseline and recent rainfall impact.
-- **Notes**: Farmer confirms whether the automatically retrieved current weather matches what they are experiencing. If "No", present simple ranges for temp/rainfall correction without forcing precise numbers.
+The onboarding pipeline consists of **6 sequential questions (Q1–Q6)** followed by a dedicated **Review & Submission Screen (REVIEW)**:
+
+```
+[Q1: Farm Location]
+         │ (Automated Telemetry Fetch: Open-Meteo + ISRIC SoilGrids)
+         ▼
+[Q2: Current Crop]
+         │ (Maps to FAO-56 Crop Knowledge & Root Depth)
+         ▼
+[Q3: Planting Date]
+         │ (Computes DAP & Phenological Growth Stage)
+         ▼
+[Q4: Farm Size]
+         │ (Acreage Context)
+         ▼
+[Q5: Irrigation Delivery Method]
+         │ (Application System Context)
+         ▼
+[Q6: Water Availability Security]
+         │ (Water Reliability Context)
+         ▼
+[REVIEW: Summary & Confirmation]
+         │ (Final Verification)
+         ▼
+[LIVE FARMER DASHBOARD]
+```
+
+---
+
+## 3. Detailed Question Specifications
+
+### Q1 — Farm Location (Google Maps Pinpoint)
+- **Question ID:** `Q1`
+- **Section:** Location (`location`)
+- **Question Title:** *"Where is your farm?"*
+- **Question Subtitle:** *"Pinpoint your exact farmland coordinates on the map to automatically load local weather and soil data."*
+- **Input Type:** Interactive Google Maps location picker with draggable pin, search autocomplete, and manual fallback coordinates.
+- **Required:** Yes (`location_confirmed === true` is required to advance).
+- **Data Captured:**
+  - `latitude` (`float`): Decimal degrees (e.g. `18.1550`).
+  - `longitude` (`float`): Decimal degrees (e.g. `74.5800`).
+  - `place_name` (`string`): Reverse-geocoded locality (e.g. *"Baramati North Farmland, Pune District, Maharashtra"*).
+  - `location_confirmed` (`boolean`): Explicit user confirmation.
+- **Automated Upstream Telemetry Triggered:**
+  - **Open-Meteo Weather API:** Resolves air temperature at 2m (°C), relative humidity (%), precipitation (mm), wind speed (km/h), and daily FAO-56 reference evapotranspiration ($ET_0$, mm/day).
+  - **Open-Meteo Root-Zone Soil Moisture:** Queries root-zone volumetric water content ($0–7\text{ cm}$ and $7–28\text{ cm}$, % VWC).
+  - **ISRIC SoilGrids 250m REST/WCS:** Queries topsoil clay percentage ($0–30\text{ cm}$, % mass), soil pH, organic carbon, and bulk density.
+
+---
+
+### Q2 — Current Crop
+- **Question ID:** `Q2`
+- **Section:** Crop (`crop`)
+- **Question Title:** *"What is your main crop for this field?"*
+- **Question Subtitle:** *"Select your primary cultivated crop to load scientific crop coefficients and moisture depletion thresholds."*
+- **Input Type:** Visual card selector with searchable catalog.
+- **Supported Crops (Milestone 9/10 Catalog):**
+  - **Tomato (*Solanum lycopersicum*):** Solanaceae family, Loam soil baseline, $K_c = [0.60, 1.15, 0.80]$, MAD fraction $p = 0.40$ (40%).
+  - **Zucchini (*Cucurbita pepo*):** Cucurbitaceae family, Sandy Loam baseline, $K_c = [0.50, 0.95, 0.75]$, MAD fraction $p = 0.50$ (50%).
+  - **Blueberry (*Vaccinium corymbosum*):** Ericaceae family, Potted/Substrate baseline, $K_c = [0.40, 1.00, 0.75]$, MAD fraction $p = 0.25$ (25%).
+- **Required:** Yes.
+- **Data Captured:** `crop` (`string` / crop identifier object).
+
+---
+
+### Q3 — Planting Date
+- **Question ID:** `Q3`
+- **Section:** Planting Timeline (`planting_date`)
+- **Question Title:** *"When was this crop planted or transplanted?"*
+- **Question Subtitle:** *"Used to determine the crop's current stage of growth and root development."*
+- **Input Type:** Native HTML5 Date Picker (`YYYY-MM-DD`).
+- **Validation:** Must not be a future date ($\text{planting\_date} \le \text{current\_date}$).
+- **Agronomic Derivative:**
+  $$\text{DAP} = \text{current\_date} - \text{planting\_date}$$
+  Dynamically computes FAO-56 phenological growth stage:
+  - `Initial` ($0 \le \text{DAP} < L_{\text{ini}}$)
+  - `Crop Development / Vegetative` ($L_{\text{ini}} \le \text{DAP} < L_{\text{ini}} + L_{\text{dev}}$)
+  - `Mid-Season / Reproductive` ($L_{\text{ini}} + L_{\text{dev}} \le \text{DAP} < L_{\text{ini}} + L_{\text{dev}} + L_{\text{mid}}$)
+  - `Late-Season / Ripening` ($\text{DAP} \ge L_{\text{ini}} + L_{\text{dev}} + L_{\text{mid}}$)
+- **Required:** Yes.
+- **Data Captured:** `planting_date` (`string` ISO date).
+
+---
 
 ### Q4 — Farm Size
-- **Question ID**: Q4
-- **Question text**: "How large is your farm?"
-- **Section**: Farm Details
-- **Input type**: Dropdown / Select
-- **Options**: Less than 1 acre, 1–2 acres, 2–5 acres, 5–10 acres, 10–25 acres, More than 25 acres (with optional exact numeric entry)
-- **Required**: YES
-- **Conditional parent**: None
-- **Condition**: N/A
-- **Database field**: `farm_size_range`, `farm_size_exact`
-- **External API dependency**: None
-- **ML/recommendation relevance**: Economic scale, total water volume required.
-- **Notes**: Optional numeric entry to be hidden behind an "Enter exact size" toggle.
-
-### Q5 — Farming Experience on This Land
-- **Question ID**: Q5
-- **Question text**: "How long have you been farming this land?"
-- **Section**: Farm Details
-- **Input type**: Dropdown / Select
-- **Options**: Less than 1 year, 1–3 years, 3–5 years, 5–10 years, 10–20 years, More than 20 years
-- **Required**: YES
-- **Conditional parent**: None
-- **Condition**: N/A
-- **Database field**: `experience_years_range`
-- **External API dependency**: None
-- **ML/recommendation relevance**: Indicates how well the farmer knows the land's microclimate and issues.
-- **Notes**: None.
-
-### Q6 — Previous Crops / Land History
-- **Question ID**: Q6
-- **Question text**: "What has been grown on this land during the last few seasons?"
-- **Section**: Farm Details
-- **Input type**: Multi-select
-- **Options**: Crop categories, Other, Don't know, This is new farmland
-- **Required**: YES
-- **Conditional parent**: None
-- **Condition**: N/A
-- **Database field**: `previous_crops`
-- **External API dependency**: None
-- **ML/recommendation relevance**: Residual soil fertility, disease cycles, crop rotation health.
-- **Notes**: Used to assess soil nutrient depletion or pest buildup.
-
-### Q7 — Historical Land Problems
-- **Question ID**: Q7
-- **Question text**: "Has your land faced any of these problems before?"
-- **Section**: Farm Details
-- **Input type**: Multi-select
-- **Options**: Waterlogging, Drought / water shortage, Poor drainage, Soil fertility problems, Salinity, Frequent crop failure, Pest problems, Disease problems, None, Don't know
-- **Required**: YES
-- **Conditional parent**: None
-- **Condition**: N/A
-- **Database field**: `historical_land_problems`
-- **External API dependency**: None
-- **ML/recommendation relevance**: Weights recommendations based on historical limitations.
-- **Notes**: None.
-
-### Q8 — Soil Information Confirmation / Fallback
-- **Question ID**: Q8
-- **Question text**: See paths below.
-- **Section**: Soil
-- **Input type**: Radio / Buttons
-- **Required**: YES
-- **Conditional parent**: None
-- **Condition**: N/A
-- **Database field**: `soilgrids_confirmed`
-- **External API dependency**: SoilGrids
-- **ML/recommendation relevance**: Establishes soil baseline.
-- **Notes**: Explicitly defines two paths depending on API success.
-  - **Path A — SoilGrids data available**: Show available information (Estimated pH, Clay, Sand, Organic carbon, Nitrogen). Ask: *"We found some information about your soil. Does this look right?"* Options: Looks correct / I have a soil report / I'm not sure.
-  - **Path B — SoilGrids unavailable**: DO NOT show empty/misleading fields. Show text: *"We couldn't automatically determine some soil details. That's okay — we'll ask you a few simple questions about your soil."* Then automatically proceed to the qualitative fallback (Q10).
-
-### Q9 — Soil Report
-- **Question ID**: Q9
-- **Question text**: "Please enter the values from your soil report."
-- **Section**: Soil
-- **Input type**: Number inputs + Unit dropdowns
-- **Options**: Fields for Nitrogen, Phosphorus, Potassium, pH. (Include "Don't know / Not available").
-- **Required**: NO (Conditional)
-- **Conditional parent**: Q8
-- **Condition**: Q8 = "I have a soil report"
-- **Database field**: `soil_test_n`, `soil_test_p`, `soil_test_k`, `soil_test_ph`, `soil_test_units`
-- **External API dependency**: None
-- **ML/recommendation relevance**: Provides measured baseline for soil profile.
-- **Notes**: The farmer can enter only the values that are actually present. Do not force all four. Every numeric value must retain its reporting unit. Do not assume universal N/P/K units and do not convert values at this stage.
-
-### Q10 — Soil Water Behaviour
-- **Question ID**: Q10
-- **Question text**: "How does your soil behave after heavy rain or irrigation?"
-- **Section**: Soil
-- **Input type**: Radio / Select
-- **Options**: Water drains very quickly, Water drains normally, Water stays for some time, Waterlogging is common, Don't know
-- **Required**: YES
-- **Conditional parent**: None
-- **Condition**: N/A
-- **Database field**: `observed_drainage`
-- **External API dependency**: None
-- **ML/recommendation relevance**: Ground-truths SoilGrids texture data.
-- **Notes**: Captures qualitative field behaviour. This is particularly important when SoilGrids data is unavailable, but it is also collected when available because it represents farmer-observed reality.
-
-### Q11 — Current Crop
-- **Question ID**: Q11
-- **Question text**: "What crop are you currently growing?"
-- **Section**: Crop
-- **Input type**: Searchable Dropdown / Select
-- **Options**: Dynamic list from Agricultural DB
-- **Required**: YES
-- **Conditional parent**: None
-- **Condition**: N/A
-- **Database field**: `current_crop_id`
-- **External API dependency**: Internal/FAO Crop Database
-- **ML/recommendation relevance**: Base crop for recommendations.
-- **Notes**: Crop list must not be hardcoded.
-
-### Q12 — Planting Date
-- **Question ID**: Q12
-- **Question text**: "When was this crop planted?"
-- **Section**: Crop
-- **Input type**: Date picker (exact or approximate month)
-- **Options**: Exact date, Approximate month
-- **Required**: YES
-- **Conditional parent**: Q11
-- **Condition**: Crop selected
-- **Database field**: `planting_date`, `is_approximate_planting_date`
-- **External API dependency**: None
-- **ML/recommendation relevance**: Used alongside crop calendar to estimate stage.
-- **Notes**: None.
-
-### Q13 — Crop Stage Confirmation
-- **Question ID**: Q13
-- **Question text**: "We think your crop is currently in the [Estimated Stage]. Is this correct?"
-- **Section**: Crop
-- **Input type**: Radio / Buttons + Select
-- **Options**: Yes / No, choose another stage (Newly planted, Germination, Early growth, Vegetative growth, Flowering, Fruiting / grain formation, Maturity, Near harvest, Don't know)
-- **Required**: YES
-- **Conditional parent**: Q12
-- **Condition**: Q12 completed
-- **Database field**: `calculated_crop_stage`, `farmer_confirmed_crop_stage`
-- **External API dependency**: Internal Crop Calendar logic
-- **ML/recommendation relevance**: Establishes exact growth stage.
-- **Notes**: None.
-
-### Q14 — Crop Condition
-- **Question ID**: Q14
-- **Question text**: "How would you describe the condition of your crop?"
-- **Section**: Crop
-- **Input type**: Radio / Select
-- **Options**: Very healthy, Healthy, Average, Weak, Showing visible stress
-- **Required**: YES
-- **Conditional parent**: None
-- **Condition**: N/A
-- **Database field**: `crop_health_condition`
-- **External API dependency**: None
-- **ML/recommendation relevance**: Identifies if interventions are urgently needed.
-- **Notes**: None.
-
-### Q15 — Irrigation Method
-- **Question ID**: Q15
-- **Question text**: "How do you currently irrigate your farm?"
-- **Section**: Irrigation
-- **Input type**: Dropdown / Radio
-- **Options**: Drip, Sprinkler, Flood, Furrow, Rain-fed, Other
-- **Required**: YES
-- **Conditional parent**: None
-- **Condition**: N/A
-- **Database field**: `irrigation_method`
-- **External API dependency**: None
-- **ML/recommendation relevance**: Affects irrigation delivery.
-- **Notes**: None.
-
-### Q16 — Water Source
-- **Question ID**: Q16
-- **Question text**: "Where does your irrigation water mainly come from?"
-- **Section**: Irrigation
-- **Input type**: Dropdown / Radio
-- **Options**: Borewell, Open well, Canal, River, Farm pond, Rainwater, Other
-- **Required**: YES
-- **Conditional parent**: Q15
-- **Condition**: Q15 is NOT "Rain-fed"
-- **Database field**: `water_source`
-- **External API dependency**: None
-- **ML/recommendation relevance**: Contextualizes water availability.
-- **Notes**: None.
-
-### Q17 — Water Availability
-- **Question ID**: Q17
-- **Question text**: "How reliable is your water supply?"
-- **Section**: Irrigation
-- **Input type**: Dropdown / Radio
-- **Options**: Always available, Usually available, Sometimes limited, Frequently limited, Severely limited
-- **Required**: YES
-- **Conditional parent**: Q15
-- **Condition**: Q15 is NOT "Rain-fed"
-- **Database field**: `water_reliability`
-- **External API dependency**: None
-- **ML/recommendation relevance**: Indicates constraint bounds for irrigation planning.
-- **Notes**: None.
-
-### Q18 — Irrigation Frequency + Last Irrigation
-- **Question ID**: Q18
-- **Question text**: "How often do you currently irrigate?" & "When was the last time you irrigated?"
-- **Section**: Irrigation
-- **Input type**: Dropdown / Select (Two fields in one step)
-- **Options**: 
-  - *Frequency*: Daily, Every 2–3 days, About once a week, Only when the soil looks dry, Based on weather, Other
-  - *Last Irrigation*: Today, Yesterday, 2–3 days ago, 4–7 days ago, More than a week ago, I don't remember, Not applicable
-- **Required**: YES
-- **Conditional parent**: Q15
-- **Condition**: Q15 is NOT "Rain-fed"
-- **Database field**: `current_irrigation_frequency`, `last_irrigation`
-- **External API dependency**: None
-- **ML/recommendation relevance**: Establishes current behaviour and estimates current field water status.
-- **Notes**: Displayed as a single question/step with two inputs.
-
-### Q19 — Farm Inputs
-- **Question ID**: Q19
-- **Question text**: "What do you currently use on your farm?"
-- **Section**: Farm Inputs
-- **Input type**: Multi-select (Categorized)
-- **Options**: 
-  - *Fertilizers*: Organic manure, Urea, DAP, NPK fertilizer, Other, None
-  - *Pest control*: Insecticides, Fungicides, Herbicides, Other, None
-- **Required**: YES
-- **Conditional parent**: None
-- **Condition**: N/A
-- **Database field**: `used_fertilizers`, `used_pest_control`
-- **External API dependency**: None
-- **ML/recommendation relevance**: Provides a profile of the farmer's resource usage.
-- **Notes**: No exact chemical names required. No fertilizer or pest control recommendation logic should be built from this.
-
-### Q20 — Farmer Goals
-- **Question ID**: Q20
-- **Question text**: "What would you most like IrrigaSense to help you with?"
-- **Section**: Goals
-- **Input type**: Multi-select
-- **Options**: Save water, Improve crop health, Improve yield, Reduce farming costs, Handle unpredictable weather, Improve soil health, Reduce crop losses, Know when to irrigate, Choose suitable crops, Understand my farm better
-- **Required**: YES
-- **Conditional parent**: None
-- **Condition**: N/A
-- **Database field**: `farmer_goals`
-- **External API dependency**: None
-- **ML/recommendation relevance**: Sets the user intent context for the dashboard.
-- **Notes**: Terminology changed to "Farmer Goals".
+- **Question ID:** `Q4`
+- **Section:** Farm Area (`farm_size`)
+- **Question Title:** *"What is the size of your cultivated farm plot?"*
+- **Question Subtitle:** *"Helps understand your operational scale."*
+- **Input Type:** Radio option selection.
+- **Options:**
+  - `< 1 acre` (Smallholder plot)
+  - `1–2 acres` (Small farm)
+  - `2–5 acres` (Medium commercial farm)
+  - `> 5 acres` (Large commercial holding)
+- **Required:** Yes.
+- **Agronomic Note:** Retained strictly for operational context. The system adheres to volumetric restraint and does **not** fabricate uncalibrated liter/gallon amounts based on farm size.
+- **Data Captured:** `farm_size` (`string`).
 
 ---
 
-## 5. Eventual Assessment Output Structure (Data Contract)
+### Q5 — Irrigation Delivery Method
+- **Question ID:** `Q5`
+- **Section:** Irrigation System (`irrigation_method`)
+- **Question Title:** *"How do you apply irrigation water to your field?"*
+- **Question Subtitle:** *"Different methods have different water delivery efficiencies and timing dynamics."*
+- **Input Type:** Radio option selection.
+- **Options:**
+  - `Drip Irrigation` (High efficiency, micro-emitter system)
+  - `Sprinkler Irrigation` (Overhead spray application)
+  - `Flood / Furrow Irrigation` (Surface flooding)
+  - `Manual / Hose / Other` (Manual watering)
+- **Required:** Yes.
+- **Data Captured:** `irrigation_method` (`string`).
 
-Once the assessment is completed, the frontend will transmit a JSON payload structured as follows. *(Note: This is the specification of the data contract, not a database implementation.)*
+---
 
-**Soil Precedence Rule:**
-- If the farmer provides a valid recent soil-test value, that measured value takes precedence over the corresponding SoilGrids estimate.
-- If no farmer measurement exists, use the SoilGrids estimate when available.
-- If neither exists, leave the value unavailable rather than inventing one.
+### Q6 — Water Availability Security
+- **Question ID:** `Q6`
+- **Section:** Water Supply (`water_availability`)
+- **Question Title:** *"How secure and reliable is your irrigation water supply?"*
+- **Question Subtitle:** *"Helps contextualize urgency and conservation recommendations."*
+- **Input Type:** Radio option selection.
+- **Options:**
+  - `Abundant` (Canals, reliable borewell, or full storage)
+  - `Moderate` (Sufficient for scheduled cycles with occasional rationing)
+  - `Limited` (Restricted supply or water stress risk)
+- **Required:** Yes.
+- **Data Captured:** `water_availability` (`string`).
 
+---
+
+## 4. Review & Submission Step (REVIEW)
+
+The **Review Screen** is rendered after Q6 completion:
+- **Title:** *"Review Your Farm Profile"*
+- **Purpose:** Displays an editable summary card of all 6 answers (Location, Crop, Planting Date & DAP, Farm Size, Irrigation Method, Water Availability).
+- **Actions:**
+  - *Edit Step:* Clicking any section navigates directly back to that question step.
+  - *Confirm & Submit:* Sends assessment to backend (`POST /api/assessments`), queries the ANFIS decision engine (`POST /api/decision/recommendation`), and transitions to the live farmer dashboard.
+
+---
+
+## 5. Automated Environmental Telemetry Contract
+
+When coordinates $(\text{lat}, \text{lon})$ are confirmed in Q1, the backend automatically resolves:
+
+| Variable | Upstream Source | API Parameter / Resolution | Internal Domain Unit |
+| :--- | :--- | :--- | :---: |
+| **Ambient Temperature** | Open-Meteo | `current.temperature_2m` | °C |
+| **Relative Humidity** | Open-Meteo | `current.relative_humidity_2m` | % |
+| **Precipitation** | Open-Meteo | `current.precipitation` | mm |
+| **Wind Speed** | Open-Meteo | `current.wind_speed_10m` | km/h |
+| **Reference ET ($ET_0$)** | Open-Meteo | `daily.et0_fao_evapotranspiration` | mm/day |
+| **Root-Zone Soil Moisture** | Open-Meteo | `current.soil_moisture_7_to_28cm` | % VWC |
+| **Topsoil Clay Content** | ISRIC SoilGrids | `clay_0-30cm_mean` (250m resolution) | % mass |
+
+> [!NOTE]
+> **Satellite Imagery Disclaimer:**
+> The satellite map in the dashboard renders visual optical overhead tiles from Google Maps to give the farmer geographical context and parcel orientation. It does **not** perform direct radiometric thermal sensing, NDVI computation, or physical root-zone moisture probing.
+
+---
+
+## 6. Backend Integration Contracts
+
+### Assessment Persistence (`POST /api/assessments`)
 ```json
 {
-  "location": {
-    "latitude": 0.0,
-    "longitude": 0.0,
-    "location_name": "",
-    "location_confirmed": true
-  },
-  "farm": {
-    "size_range": "",
-    "size_exact": null,
-    "experience_years_range": ""
-  },
-  "land_history": {
-    "previous_crops": [],
-    "historical_problems": []
-  },
-  "soil": {
-    "soilgrids": {
-      "ph": null,
-      "clay": null,
-      "sand": null,
-      "organic_carbon": null,
-      "nitrogen": null
+  "farm_id": 1,
+  "assessment_version": "2.0.0",
+  "data": {
+    "location": {
+      "latitude": 18.155,
+      "longitude": 74.58,
+      "place_name": "Baramati North Farmland, Pune District, Maharashtra",
+      "location_confirmed": true
     },
-    "farmer_report": {
-      "n": null,
-      "p": null,
-      "k": null,
-      "ph": null,
-      "units": {}
-    },
-    "resolved": {
-      "n": null,
-      "p": null,
-      "k": null,
-      "ph": null,
-      "clay": null,
-      "sand": null,
-      "organic_carbon": null
-    },
-    "source": {},
-    "soilgrids_confirmed": true,
-    "has_soil_report": false,
-    "observed_drainage": ""
-  },
-  "weather": {
-    "api_current": {},
-    "farmer_confirmed": true,
-    "farmer_reported_weather": {}
-  },
-  "crop": {
-    "current_crop_id": "",
-    "planting_date": "",
-    "is_approximate_planting_date": false,
-    "calculated_stage": "",
-    "farmer_confirmed_stage": "",
-    "health_condition": ""
-  },
-  "irrigation": {
-    "method": "",
-    "water_source": "",
-    "water_reliability": "",
-    "current_frequency": "",
-    "last_irrigation": ""
-  },
-  "farm_inputs": {
-    "fertilizers": [],
-    "pest_control": []
-  },
-  "goals": {
-    "farmer_goals": []
+    "crop": "Tomato",
+    "planting_date": "2026-08-15",
+    "farm_size": "2–5 acres",
+    "irrigation_method": "Drip",
+    "water_availability": "Moderate"
   }
 }
 ```
+
+### Recommendation Endpoint (`POST /api/decision/recommendation`)
+The decision engine evaluates the 6-question context against the frozen ANFIS 24-hour forecast, returning a deterministic recommendation:
+- `NO_IRRIGATION` (Soil moisture comfortably above MAD threshold)
+- `MONITOR` (Approaching depletion boundary within 24 hours)
+- `IRRIGATION_RECOMMENDED` (Predicted moisture falls below MAD threshold)
+- `IRRIGATION_URGENT` (Severe depletion approaching permanent wilting point)
+- `INSUFFICIENT_CONFIDENCE` (Inputs exceed validated operating domain, triggering safety guardrails)

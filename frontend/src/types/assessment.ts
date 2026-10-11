@@ -151,6 +151,9 @@ export interface AssessmentUpdate {
 export interface AssessmentRead {
   id: number;
   farm_id: number;
+  user_id?: number | null;
   assessment_version: string;
-  data: AssessmentPayloadData;
+  created_at?: string | null;
+  updated_at?: string | null;
+  data: AssessmentPayloadData | AssessmentData | any;
 }

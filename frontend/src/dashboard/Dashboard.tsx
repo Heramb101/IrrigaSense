@@ -47,6 +47,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onStartNewAssessment }) =>
   const fetchRecommendation = useCallback(async () => {
     setIsLoading(true);
     setError(null);
+    setRecommendation(null); // Invalidate any previous/stale recommendation on fresh fetch
 
     try {
       const response = await decisionApi.getRecommendation({
@@ -59,43 +60,20 @@ export const Dashboard: React.FC<DashboardProps> = ({ onStartNewAssessment }) =>
         water_availability: waterAvailability,
       });
 
+      if (!response || !response.decision || !response.confidence) {
+        throw new Error('Received malformed or incomplete recommendation data from server.');
+      }
+
       setRecommendation(response);
+      setError(null);
     } catch (err: any) {
       console.warn('Backend decision API request failed:', err?.message);
-      // If backend network error or offline, provide a realistic resilient fallback
+      // Strictly clear recommendation: never fabricate a successful advisory on error
+      setRecommendation(null);
       setError(
-        'Unable to reach recommendation service. Showing cached or local estimate.'
+        err?.message ||
+          'Unable to connect to the recommendation service. An accurate advisory cannot be determined right now. Please check your network connection or server status and retry.'
       );
-      // Safe fallback state for demonstration if backend is unreachable
-      setRecommendation({
-        decision: 'NO_IRRIGATION',
-        confidence: 'HIGH',
-        current_moisture: 26.5,
-        predicted_moisture_24h: 27.6,
-        field_capacity: 32.0,
-        mad_threshold: 24.8,
-        depletion_fraction: 0.25,
-        moisture_state: 'SAFE',
-        crop: cropName,
-        crop_stage: 'Vegetative / Crop Development',
-        dap: 52,
-        reason:
-          'No irrigation is recommended right now. The predicted soil moisture for the upcoming 24 hours remains comfortably above the allowable depletion threshold.',
-        domain_status: 'VALIDATED_DOMAIN',
-        warnings: [],
-        context: {
-          irrigation_method: irrigationMethod,
-          water_availability: waterAvailability,
-          farm_size: farmSize,
-        },
-        weather_summary: {
-          temperature_c: 24.5,
-          humidity_percent: 55.0,
-          et0_mm: 4.5,
-          precipitation_mm: 0.0,
-        },
-        last_updated: new Date().toISOString(),
-      });
     } finally {
       setIsLoading(false);
     }
@@ -149,6 +127,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onStartNewAssessment }) =>
             onClick={fetchRecommendation}
             disabled={isLoading}
             title="Re-run recommendation analysis"
+            data-testid="dashboard-refresh-btn"
           >
             ↻ Refresh
           </button>
@@ -163,24 +142,39 @@ export const Dashboard: React.FC<DashboardProps> = ({ onStartNewAssessment }) =>
         </div>
       </header>
 
-      {/* Network Error Notice (Dismissible/informative) */}
-      {error && (
-        <div className="dashboard-error-banner" role="alert">
-          <span className="error-icon">ℹ️</span>
-          <span className="error-text">{error}</span>
-          <button
-            type="button"
-            className="btn btn-sm btn-retry"
-            onClick={fetchRecommendation}
-          >
-            Retry Connection
-          </button>
-        </div>
-      )}
-
       {/* Main Content Area */}
-      {isLoading && !recommendation ? (
+      {isLoading ? (
         <DashboardLoading />
+      ) : error ? (
+        <div className="dashboard-error-state" role="alert" data-testid="dashboard-error-state">
+          <div className="error-state-card">
+            <span className="error-state-icon">⚠️</span>
+            <h2 className="error-state-heading">Recommendation Temporarily Unavailable</h2>
+            <p className="error-state-desc">{error}</p>
+            <div className="error-state-advisory-box">
+              <p className="error-state-advisory">
+                <strong>Agronomic Advisory:</strong> IrrigaSense cannot safely provide an irrigation decision without live environmental telemetry and model inference. Do not assume irrigation is unnecessary.
+              </p>
+            </div>
+            <div className="error-state-actions">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={fetchRecommendation}
+                data-testid="retry-recommendation-btn"
+              >
+                ↻ Retry Analysis
+              </button>
+              <button
+                type="button"
+                className="btn btn-outline"
+                onClick={handleStartNew}
+              >
+                ↺ New Assessment
+              </button>
+            </div>
+          </div>
+        </div>
       ) : recommendation ? (
         <main className="dashboard-cards-container">
           {/* 2. Main Irrigation Recommendation Card (Visually dominant) */}

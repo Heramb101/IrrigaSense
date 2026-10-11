@@ -141,7 +141,7 @@ Moisture states are classified relative to physical thresholds, rather than fixe
 
 ## 7. Domain Guardrails (`domain_guardrails.py`)
 
-Milestone 8D revealed that the frozen ANFIS model performs exceptionally well on open-field mineral soils ($R^2 = 0.81$ on validation), but extrapolates poorly when presented with extreme soilless desiccation regimes ($clay \le 2.0\%$ and moisture $< 15\%$).
+Milestone 8D evaluated the frozen ANFIS model against the quarantined out-of-sample test partition (7,051 rows). The model demonstrated exceptional generalization on open-field agricultural mineral soils ($R^2 = 0.985$, $\text{MAE} = 1.96\%$ VWC on Zones 2 & 4, which represent 68.6% of the test set; compared to validation $R^2 = 0.770$ aggregate / $0.811$ mineral zones). However, on unobserved extreme soilless desiccation regimes (Zone 5 potted blueberry post-harvest drydown to $3.71\%$ VWC where $clay \le 2.0\%$, $\text{MAE} = 50.72\%$, bringing aggregate raw test $R^2$ to $-0.475$), the affine linear consequents extrapolate poorly.
 
 The guardrail module inspects every input **before** the decision layer accepts the ANFIS prediction:
 
